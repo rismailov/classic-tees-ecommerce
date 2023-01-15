@@ -1,0 +1,13 @@
+body {
+    margin: 0 !important;
+    padding: 0;
+    overflow-x: hidden;
+    background: transparent !important;
+}
+
+/* prevent scrollbar from messing with the layout */
+/* https://stackoverflow.com/questions/1417934/how-to-prevent-scrollbar-from-repositioning-web-page */
+html,
+header {
+    margin-right: calc(100% - 100vw);
+}
