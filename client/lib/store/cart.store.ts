@@ -9,18 +9,7 @@ type CartStore = {
 }
 
 const useCartStore = create<CartStore>((set) => ({
-    items: [
-        {
-            id: '380-131310901231k2jkw',
-            imageUrl:
-                'http://localhost:8000/storage/images/products/4/4002L_MILITARYBEIGE_3.webp',
-            name: 'Test One',
-            size: { id: '10', name: 'xl' },
-            colour: { id: '1', name: 'Black' },
-            price: '25.31',
-            amount: 1,
-        },
-    ],
+    items: [],
 
     addItem: (item) =>
         set((state) => {

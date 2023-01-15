@@ -5,7 +5,9 @@ import { sleep } from '@/utils'
 import { Box, Text, Group, Stack, ActionIcon } from '@mantine/core'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import { FiCheck, FiPlus, FiX } from 'react-icons/fi'
+import { FiPlus } from '@react-icons/all-files/fi/FiPlus'
+import { FiX } from '@react-icons/all-files/fi/FiX'
+import { SelectSizeActionIcon } from './quick-add/SelectSizeActionIcon'
 import { useStyles } from './QuickAdd.styles'
 
 type TSize = ProductEntity['sizes'][number]
@@ -105,53 +107,14 @@ export const QuickAdd = ({
 
                             <Group spacing={5}>
                                 {product.sizes.map((size) => (
-                                    <ActionIcon
+                                    <SelectSizeActionIcon
                                         key={size.id}
-                                        onClick={() => onAddItem(size)}
-                                        loading={
-                                            isLoading &&
-                                            size.id === selectedSize?.id
-                                        }
-                                        size="lg"
-                                        radius="xl"
-                                        variant="outline"
-                                        className={classes.size}
-                                        sx={(theme) => ({
-                                            ...(size.id === selectedSize?.id &&
-                                                !isLoading && {
-                                                    background: theme.fn.rgba(
-                                                        theme.fn.themeColor(
-                                                            'orange',
-                                                        ),
-                                                        0.1,
-                                                    ),
-                                                    ':hover': {
-                                                        background:
-                                                            theme.fn.themeColor(
-                                                                'orange',
-                                                            ),
-                                                    },
-                                                    borderColor:
-                                                        theme.fn.themeColor(
-                                                            'orange',
-                                                        ),
-                                                    svg: {
-                                                        color: theme.fn.themeColor(
-                                                            'orange',
-                                                        ),
-                                                    },
-                                                }),
-                                        })}
-                                    >
-                                        {size.id !== selectedSize?.id ? (
-                                            size.name.toUpperCase()
-                                        ) : (
-                                            <FiCheck
-                                                size={17}
-                                                strokeWidth={2}
-                                            />
-                                        )}
-                                    </ActionIcon>
+                                        size={size}
+                                        isSelected={size.id == selectedSize?.id}
+                                        isLoading={isLoading}
+                                        classes={classes.size}
+                                        onAddItem={() => onAddItem(size)}
+                                    />
                                 ))}
                             </Group>
                         </Stack>

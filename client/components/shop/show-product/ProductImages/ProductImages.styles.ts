@@ -12,11 +12,13 @@ export const useStyles = createStyles((theme) => ({
         color: theme.colors.dark[9],
         boxShadow: theme.shadows.xl,
         border: `1px solid ${theme.colors.gray[3]}`,
-
         ':hover': {
             background: theme.white,
         },
-
+        '&:disabled': {
+            background: theme.colors.gray[0],
+            boxShadow: 'none',
+        },
         svg: {
             width: 25,
             height: 25,

@@ -14,11 +14,6 @@ import { Navigation, Thumbs } from 'swiper'
 import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react'
 import { Swiper as SwiperCore } from 'swiper/types'
 import 'swiper/css'
-import { motion } from 'framer-motion'
-
-const transition = {
-    ease: [0.6, 0.01, -0.05, 0.9],
-}
 
 export const ProductImages = ({ product }: { product: ProductEntity }) => {
     const { classes } = useStyles()
@@ -32,15 +27,19 @@ export const ProductImages = ({ product }: { product: ProductEntity }) => {
     // Track whether or not thumbs slider has reached the edge to disable custom nav buttons
     const [{ isBeginning, isEnd }, setNavigationState] = useState({
         isBeginning: true,
-        isEnd: false,
+        isEnd: true,
     })
+
+    // useEffect(() => {
+    //     console.log(isBeginning, isEnd)
+    // }, [isBeginning, isEnd])
 
     const [mainSwiperParams, setMainSwiperParams] = useState<SwiperProps>({
         modules: [Thumbs],
         thumbs: {
             swiper: thumbsSwiperRef.current,
         },
-        onBeforeInit: (swiper) => (mainSwiperRef.current = swiper),
+        onInit: (swiper) => (mainSwiperRef.current = swiper),
         onActiveIndexChange: (swiper) => {
             setMainActiveIndex(swiper.activeIndex)
         },
@@ -48,7 +47,6 @@ export const ProductImages = ({ product }: { product: ProductEntity }) => {
 
     // @note this useEffect is needed because the main slider
     // gets initialised BEFORE the thumbs slider.
-    //
     // in other words: thumbsSwiperRef.current is still null when mainSwiperParams
     // got initialised
     useEffect(() => {
@@ -70,9 +68,17 @@ export const ProductImages = ({ product }: { product: ProductEntity }) => {
         slidesPerView: 4,
         slidesPerGroup: 4,
         slideToClickedSlide: true,
-        onBeforeInit: (swiper) => (thumbsSwiperRef.current = swiper),
+        onInit: (swiper) => {
+            thumbsSwiperRef.current = swiper
+
+            setNavigationState({
+                isBeginning: swiper.isBeginning,
+                isEnd: swiper.isEnd,
+            })
+        },
         onSlideChange: ({ isBeginning, isEnd }) =>
             setNavigationState({ isBeginning, isEnd }),
+        style: { width: '100%' },
     }
 
     return (
@@ -126,7 +132,7 @@ export const ProductImages = ({ product }: { product: ProductEntity }) => {
                     onClick={() => thumbsSwiperRef.current?.slidePrev()}
                     variant="subtle"
                     className={classes.secondSliderNavButton}
-                    disabled={isBeginning || !thumbsSwiperRef.current}
+                    disabled={isBeginning}
                 >
                     <FiChevronLeft />
                 </ActionIcon>
@@ -166,7 +172,7 @@ export const ProductImages = ({ product }: { product: ProductEntity }) => {
                     onClick={() => thumbsSwiperRef.current?.slideNext()}
                     variant="light"
                     className={classes.secondSliderNavButton}
-                    disabled={isEnd || !thumbsSwiperRef.current}
+                    disabled={isEnd}
                 >
                     <FiChevronRight />
                 </ActionIcon>

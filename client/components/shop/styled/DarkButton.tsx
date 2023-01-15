@@ -8,7 +8,19 @@ interface ButtonProps {
 // Create intermediate component with default ref type and props
 const _Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ({ children, ...others }, ref) => (
-        <Button ref={ref} fz="md" color="gray" size="lg" {...others}>
+        <Button
+            ref={ref}
+            fz="md"
+            color="gray"
+            size="lg"
+            sx={(theme) => ({
+                background: theme.colors.dark[7],
+                ':hover': {
+                    background: theme.colors.dark[5],
+                },
+            })}
+            {...others}
+        >
             {children}
         </Button>
     ),
