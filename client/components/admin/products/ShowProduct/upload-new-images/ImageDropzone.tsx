@@ -8,14 +8,12 @@ export const ImageDropzone = ({
     removeImagePreview,
     images,
     errors,
-    mainImageIndex,
     makeMain,
 }: {
     onDrop: (files: FileWithPath[]) => void
     removeImagePreview: (index: number) => void
     images: FileWithPath[]
     errors: ReactNode
-    mainImageIndex?: number
     makeMain?: (index: number) => void
 }) => {
     /* Image previews with ability to make image main */
@@ -26,7 +24,6 @@ export const ImageDropzone = ({
                 file={file}
                 index={index}
                 removeImage={removeImagePreview}
-                isMain={mainImageIndex === index}
                 makeMain={makeMain}
             />
         )

@@ -12,12 +12,21 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nanoid', 'category', 'name', 'price',
+        'nanoid',
+        'category',
+        'name',
+        'price',
+        'is_discounted',
+        'discount_percent',
     ];
 
     protected $casts = [
         'created_at' => Date::class,
     ];
+
+    public const MIN_DISCOUNT = 5;
+
+    public const MAX_DISCOUNT = 50;
 
     protected static function boot()
     {
@@ -74,10 +83,5 @@ class Product extends Model
     {
         return $this->morphMany(Image::class, 'imageable')
             ->orderBy('order', 'asc');
-    }
-
-    public function discounts()
-    {
-        return $this->belongsTo(Discount::class);
     }
 }

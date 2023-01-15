@@ -35,6 +35,8 @@ export const EditProductData = (product: ProductEntity) => {
             colour: product.colour.value,
             sizes: product.sizes.map((s) => s.id),
             price: +product.price,
+            isDiscounted: false,
+            discountPercent: 5,
         },
     })
 

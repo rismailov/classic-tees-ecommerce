@@ -42,9 +42,13 @@ class ProductController extends Controller
             $product = DB::transaction(function () use ($data) {
                 // create product
                 $product = Product::create([
-                    'name'     => $data['name'],
-                    'price'    => $data['price'],
-                    'category' => $data['category'],
+                    'name'             => $data['name'],
+                    'price'            => $data['price'],
+                    'category'         => $data['category'],
+                    'is_discounted'    => $data['is_discounted'],
+                    'discount_percent' => $data['is_discounted']
+                        ? $data['discount_percent']
+                        : null,
                 ]);
 
                 // associate with colours
@@ -104,22 +108,25 @@ class ProductController extends Controller
     public function update(Product $product, UpdateProductRequest $request)
     {
         try {
-            $validated = $request->validated();
-            ray($validated);
+            $data = $request->validated();
 
-            DB::transaction(function () use ($validated, $product) {
+            DB::transaction(function () use ($data, $product) {
                 // create product
                 $product->update([
-                    'name'     => $validated['name'],
-                    'price'    => $validated['price'],
-                    'category' => $validated['category'],
+                    'name'             => $data['name'],
+                    'price'            => $data['price'],
+                    'category'         => $data['category'],
+                    'is_discounted'    => $data['is_discounted'],
+                    'discount_percent' => $data['is_discounted']
+                        ? $data['discount_percent']
+                        : null,
                 ]);
 
                 // associate with sizes
-                $product->sizes()->sync($validated['sizes']);
+                $product->sizes()->sync($data['sizes']);
 
                 // replace colour for this product
-                $product->colours()->sync([$validated['colour']]);
+                $product->colours()->sync([$data['colour']]);
             });
 
             return $this->respondWithSuccess([

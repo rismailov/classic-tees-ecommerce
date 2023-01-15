@@ -21,7 +21,8 @@ export default function CreateProduct() {
             sizes: [],
             price: 0.0,
             images: [],
-            mainImageIndex: null,
+            isDiscounted: false,
+            discountPercent: 5,
         },
     })
 
@@ -46,28 +47,18 @@ export default function CreateProduct() {
         form.setValues({
             ...form.values,
             images: files,
-            mainImageIndex: files.length ? 0 : null,
         })
     }
-
-    const makeImageMain = (index: number) =>
-        form.setFieldValue('mainImageIndex', index)
 
     const removeImagePreview = (index: number) => {
         form.setFieldValue(
             'images',
             form.values.images.filter((_image, i) => i !== index),
         )
-
-        // if current main image is being removed and there are more images,
-        // make the first image in array main
-        if (form.values.mainImageIndex === index && form.values.images.length) {
-            makeImageMain(0)
-        }
     }
 
     return (
-        <Card sx={{ maxWidth: 500 }} p="xl">
+        <Card p="xl" maw={500}>
             <form onSubmit={form.onSubmit((data) => mutateAsync(data))}>
                 <Stack>
                     <ProductFormCommon form={form} />
@@ -77,18 +68,16 @@ export default function CreateProduct() {
                         removeImagePreview={removeImagePreview}
                         images={form.values.images}
                         errors={form.errors.images}
-                        mainImageIndex={form.values.mainImageIndex ?? 0}
-                        makeMain={makeImageMain}
                     />
 
                     <Button
                         type="submit"
                         fullWidth
-                        sx={{ height: 45 }}
+                        h={45}
                         loading={isFormSubmitting}
                         variant={colorScheme === 'dark' ? 'light' : 'filled'}
                     >
-                        Update
+                        Save
                     </Button>
                 </Stack>
             </form>

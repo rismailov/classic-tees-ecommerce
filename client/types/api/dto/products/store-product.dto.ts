@@ -7,5 +7,6 @@ export type StoreProductDto = {
     sizes: (string | number)[]
     price: number
     images: FileWithPath[]
-    mainImageIndex?: null | number
+    isDiscounted: boolean
+    discountPercent: number
 }

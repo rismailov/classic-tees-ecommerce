@@ -104,7 +104,7 @@ export const EditProductImages = (product: ProductEntity) => {
                             <CurrentImage
                                 currentImage={image}
                                 canDelete={images.length > 1}
-                                deleteImage={deleteImage}
+                                deleteImage={() => deleteImage(image.id)}
                             />
                         </Reorder.Item>
                     ))}

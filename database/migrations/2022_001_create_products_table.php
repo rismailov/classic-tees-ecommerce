@@ -18,6 +18,8 @@ return new class() extends Migration {
             $table->string('name')->unique();
             $table->string('category');
             $table->unsignedDecimal('price', 9, 2);
+            $table->boolean('is_discounted')->default(false);
+            $table->tinyInteger('discount_percent')->nullable();
             $table->timestamps();
         });
     }

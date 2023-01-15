@@ -7,10 +7,13 @@ import {
     Text,
     Group,
     ColorSwatch,
+    Stack,
+    Input,
 } from '@mantine/core'
 import { UseFormReturnType } from '@mantine/form'
-import { forwardRef } from 'react'
-import { FiDollarSign } from 'react-icons/fi'
+import { forwardRef, useEffect, useRef } from 'react'
+import { FiDollarSign } from '@react-icons/all-files/fi/FiDollarSign'
+import { FiPercent } from '@react-icons/all-files/fi/FiPercent'
 import { useQuery } from 'react-query'
 
 interface ItemProps extends React.ComponentPropsWithoutRef<'div'> {
@@ -34,8 +37,19 @@ const ColourSelectItem = forwardRef<HTMLDivElement, ItemProps>(
 export const ProductFormCommon = ({
     form,
 }: {
+    // TODO: fix types
     form: UseFormReturnType<any>
 }) => {
+    // focus on input when discount enabled
+    const { isDiscounted } = form.values
+    const discountPercentInputRef = useRef<HTMLInputElement>(null)
+
+    useEffect(() => {
+        if (isDiscounted && discountPercentInputRef.current) {
+            discountPercentInputRef.current.focus()
+        }
+    }, [isDiscounted, discountPercentInputRef])
+
     const { data: options, isLoading: isOptionsLoading } = useQuery(
         'property-options',
         getPropertyOptions,
@@ -101,6 +115,30 @@ export const ProductFormCommon = ({
                     <Checkbox key={id} value={id} label={value} />
                 ))}
             </Checkbox.Group>
+
+            {/* discount */}
+            <Stack spacing={5}>
+                <Input.Label>Discount</Input.Label>
+
+                <Checkbox
+                    label="Discounted"
+                    {...form.getInputProps('isDiscounted', {
+                        type: 'checkbox',
+                    })}
+                />
+
+                {form.values.isDiscounted && (
+                    <NumberInput
+                        ref={discountPercentInputRef}
+                        min={5}
+                        max={50}
+                        precision={0}
+                        placeholder={5}
+                        icon={<FiPercent />}
+                        {...form.getInputProps('discountPercent')}
+                    />
+                )}
+            </Stack>
         </>
     )
 }

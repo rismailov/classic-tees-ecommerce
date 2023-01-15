@@ -9,7 +9,7 @@ export const CurrentImage = ({
     canDelete,
 }: {
     currentImage: ProductEntity['images'][number]
-    deleteImage: (id: number) => void
+    deleteImage: () => void
     canDelete: boolean
 }) => {
     return (
@@ -48,7 +48,7 @@ export const CurrentImage = ({
                     <ImageActionButton
                         tooltiplabel="Delete image"
                         color="red"
-                        onClick={() => deleteImage(currentImage.id)}
+                        onClick={deleteImage}
                     >
                         <FiTrash2 size={15} />
                     </ImageActionButton>
