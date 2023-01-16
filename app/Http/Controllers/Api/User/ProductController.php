@@ -21,37 +21,35 @@ class ProductController extends Controller
     public function index(GetProductsRequest $request)
     {
         $v = fn (string $key) => $request->validated($key);
-        $params = $request->validated();
-        $limit = $request->validated('limit');
 
         $products = Product::with(['sizes', 'images'])
-            ->when($v('categories'), function ($q) use ($params) {
-                $q->whereIn('category', $params['categories']);
+            ->when($v('categories'), function ($q) use ($v) {
+                $q->whereIn('category', $v('categories'));
             })
-            ->when($v('sizes'), function ($q) use ($params) {
-                $q->whereHas('sizes', function ($sub) use ($params) {
-                    $sub->whereIn('sizes.id', $params['sizes']);
+            ->when($v('sizes'), function ($q) use ($v) {
+                $q->whereHas('sizes', function ($sub) use ($v) {
+                    $sub->whereIn('sizes.id', $v('sizes'));
                 });
             })
-            ->when($v('colours'), function ($q) use ($params) {
-                $q->whereHas('colours', function ($sub) use ($params) {
-                    $sub->whereIn('colours.id', $params['colours']);
+            ->when($v('colours'), function ($q) use ($v) {
+                $q->whereHas('colours', function ($sub) use ($v) {
+                    $sub->whereIn('colours.id', $v('colours'));
                 });
             })
-            ->when($v('minPrice'), function ($q) use ($params) {
-                $q->where('price', '>=', $params['minPrice']);
+            ->when($v('onSale') === true, fn ($q) => $q->whereIsDiscounted(true))
+            ->when($v('minPrice'), function ($q) use ($v) {
+                $q->where('price', '>=', $v('minPrice'));
             })
-            ->when($v('maxPrice'), function ($q) use ($params) {
-                $q->where('price', '<=', $params['maxPrice']);
+            ->when($v('maxPrice'), function ($q) use ($v) {
+                $q->where('price', '<=', $v('maxPrice'));
             })
-            ->when($v('sort'), function ($q) use ($params) {
-                [$key, $value] = explode('-', $params['sort']);
+            ->when($v('sort'), function ($q) use ($v) {
+                [$key, $value] = explode('-', $v('sort'));
                 $key = $key === 'date' ? 'created_at' : 'price';
 
                 $q->orderBy($key, $value);
             })
-            ->latest()
-            ->paginate($limit);
+            ->paginate($v('limit'));
 
         return $this->respondWithSuccess(
             ProductsResource::collection($products)

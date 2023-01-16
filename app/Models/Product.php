@@ -20,6 +20,14 @@ class Product extends Model
         'discount_percent',
     ];
 
+    protected $hidden = [
+        'discount_percent',
+    ];
+
+    protected $attributes = [
+        'discounted_price',
+    ];
+
     protected $casts = [
         'created_at' => Date::class,
     ];
@@ -54,7 +62,7 @@ class Product extends Model
     }
 
     /**
-     * Get human readable category name.
+     * Get human readable colour name.
      *
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
@@ -65,6 +73,26 @@ class Product extends Model
                 'value' => (string) $this->colours->first()->id,
                 'label' => __('models.colours.'.$this->colours->first()->value),
             ]
+        );
+    }
+
+    /**
+     * Get human readable colour name.
+     *
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    public function discountedPrice(): Attribute
+    {
+        $discounted_price = null;
+
+        if ($this->is_discounted) {
+            $percent_in_float = bcdiv((string) $this->discount_percent, '100', 3);
+            $price_difference = bcmul($this->price, $percent_in_float, 2);
+            $discounted_price = bcsub($this->price, $price_difference, 2);
+        }
+
+        return Attribute::make(
+            get: fn () => $discounted_price,
         );
     }
 

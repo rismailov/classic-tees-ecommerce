@@ -1,5 +1,5 @@
 import { ProductEntity } from '@/types/entities/product.entity'
-import { Stack, Title, Text, UnstyledButton, Box } from '@mantine/core'
+import { Stack, Title, Text, UnstyledButton, Box, Group } from '@mantine/core'
 import Link from 'next/link'
 import Image from 'next/image'
 import React, { useState } from 'react'
@@ -47,7 +47,17 @@ export const ProductCard = ({ product }: { product: ProductEntity }) => {
 
                 <Title order={5}>{product.name}</Title>
 
-                <Text>${product.price} USD</Text>
+                <Group spacing="xs">
+                    <Text strikethrough={product.price.discounted !== null}>
+                        {product.price.initial} USD
+                    </Text>
+
+                    {product.price.discounted !== null && (
+                        <Text color="orange" weight={500}>
+                            {product.price.discounted} USD
+                        </Text>
+                    )}
+                </Group>
             </Stack>
         </UnstyledButton>
     )
