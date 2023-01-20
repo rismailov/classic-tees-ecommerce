@@ -15,17 +15,11 @@ class Product extends Model
         'nanoid',
         'category',
         'name',
+        'description',
         'price',
         'is_discounted',
         'discount_percent',
-    ];
-
-    protected $hidden = [
-        'discount_percent',
-    ];
-
-    protected $attributes = [
-        'discounted_price',
+        'discount_price',
     ];
 
     protected $casts = [
@@ -76,26 +70,6 @@ class Product extends Model
         );
     }
 
-    /**
-     * Get human readable colour name.
-     *
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute
-     */
-    public function discountedPrice(): Attribute
-    {
-        $discounted_price = null;
-
-        if ($this->is_discounted) {
-            $percent_in_float = bcdiv((string) $this->discount_percent, '100', 3);
-            $price_difference = bcmul($this->price, $percent_in_float, 2);
-            $discounted_price = bcsub($this->price, $price_difference, 2);
-        }
-
-        return Attribute::make(
-            get: fn () => $discounted_price,
-        );
-    }
-
     // Relations
     public function colours()
     {
@@ -105,6 +79,11 @@ class Product extends Model
     public function sizes()
     {
         return $this->belongsToMany(Size::class);
+    }
+
+    public function discounts()
+    {
+        return $this->belongsToMany(Discount::class);
     }
 
     public function images()

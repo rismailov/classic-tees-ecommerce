@@ -7,10 +7,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Admin\Products\StoreProductRequest;
 use App\Http\Requests\Api\Admin\Products\UpdateProductRequest;
 use App\Http\Resources\Api\ProductResource;
-use App\Http\Resources\Api\ProductsResource;
 use App\Models\Colour;
+use App\Models\Discount;
 use App\Models\Product;
 use App\Models\Size;
+use App\Services\ProductService;
 use F9Web\ApiResponseHelpers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -22,7 +23,7 @@ class ProductController extends Controller
     public function index()
     {
         return $this->respondWithSuccess(
-            ProductsResource::collection(
+            ProductResource::collection(
                 Product::with(['sizes', 'images'])->latest()->get()
             )
         );
@@ -46,12 +47,14 @@ class ProductController extends Controller
                     'price'            => $data['price'],
                     'category'         => $data['category'],
                     'is_discounted'    => $data['is_discounted'],
-                    'discount_percent' => $data['is_discounted']
-                        ? $data['discount_percent']
-                        : null,
+                    'discount_percent' => $data['discount_percent'],
+                    'discount_price'   => ProductService::calculateDiscountPrice(
+                        $data['price'],
+                        $data['discount_percent']
+                    ),
                 ]);
 
-                // associate with colours
+                // associate with colour
                 $product->colours()->sync($data['colours']);
 
                 // associate with sizes
@@ -95,7 +98,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return response()->json(new ProductsResource($product));
+        return response()->json(new ProductResource($product));
     }
 
     /**
@@ -119,6 +122,12 @@ class ProductController extends Controller
                     'is_discounted'    => $data['is_discounted'],
                     'discount_percent' => $data['is_discounted']
                         ? $data['discount_percent']
+                        : null,
+                    'discount_price' => $data['is_discounted']
+                        ? ProductService::calculateDiscountPrice(
+                            $data['price'],
+                            $data['discount_percent']
+                        )
                         : null,
                 ]);
 

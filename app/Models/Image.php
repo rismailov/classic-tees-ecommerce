@@ -20,4 +20,6 @@ class Image extends Model
     {
         return $this->morphTo();
     }
+
+    // TODO: add main image getter (by order)
 }

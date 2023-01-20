@@ -30,10 +30,6 @@ export const ProductImages = ({ product }: { product: ProductEntity }) => {
         isEnd: true,
     })
 
-    // useEffect(() => {
-    //     console.log(isBeginning, isEnd)
-    // }, [isBeginning, isEnd])
-
     const [mainSwiperParams, setMainSwiperParams] = useState<SwiperProps>({
         modules: [Thumbs],
         thumbs: {

@@ -4,21 +4,14 @@ import {
 } from '@/lib/api/admin/products'
 import { REACT_QUERY_PRODUCTS_KEY } from '@/lib/constants'
 import { UpdateProductDto } from '@/types/api/dto/products/update-product.dto'
-import { ProductEntity } from '@/types/entities/product.entity'
-import {
-    Stack,
-    Text,
-    Loader,
-    Button,
-    useMantineColorScheme,
-} from '@mantine/core'
+import { AdminProductEntity } from '@/types/entities/product.entity'
+import { Stack, Text, Loader, Button } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { SectionLayout } from '../../SectionLayout'
 import { ProductFormCommon } from '../ProductFormCommon'
 
-export const EditProductData = (product: ProductEntity) => {
-    const { colorScheme } = useMantineColorScheme()
+export const EditProductData = (product: AdminProductEntity) => {
     const queryClient = useQueryClient()
     const { data: options, isLoading: isOptionsLoading } = useQuery(
         'property-options',
@@ -33,10 +26,10 @@ export const EditProductData = (product: ProductEntity) => {
             name: product.name,
             category: product.category.value,
             colour: product.colour.value,
-            sizes: product.sizes.map((s) => s.id),
-            price: +product.price,
-            isDiscounted: false,
-            discountPercent: 5,
+            sizes: product.sizes.map((s) => s.value),
+            price: +product.price.initial,
+            isDiscounted: product.price.discounted !== null,
+            discountPercent: product.discountPercent,
         },
     })
 
@@ -71,9 +64,6 @@ export const EditProductData = (product: ProductEntity) => {
                             fullWidth
                             sx={{ height: 45 }}
                             loading={isSubmitting}
-                            variant={
-                                colorScheme === 'dark' ? 'light' : 'filled'
-                            }
                         >
                             Update
                         </Button>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Api;
 
+use App\Models\Product;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductResource extends JsonResource
@@ -15,10 +16,14 @@ class ProductResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'       => $this->id,
-            'nanoid'   => $this->nanoid,
-            'name'     => $this->name,
-            'price'    => $this->price,
+            'id'          => $this->id,
+            'nanoid'      => $this->nanoid,
+            'name'        => $this->name,
+            'description' => $this->description,
+            'price'       => [
+                'initial'    => $this->price,
+                'discounted' => $this->discount_price,
+            ],
             'category' => [
                 'value' => $this->getRawOriginal('category'),
                 'label' => $this->category,
@@ -35,8 +40,8 @@ class ProductResource extends JsonResource
                 ->map(function ($size) {
                     return [
                         // NOTE: casting as string is needed for mantine checkboxes/selects to work properly
-                        'id'   => (string) $size->id,
-                        'name' => $size->value,
+                        'value' => (string) $size->id,
+                        'label' => $size->value,
                     ];
                 }),
             'images' => $this->images->map(function ($img) {
@@ -45,6 +50,14 @@ class ProductResource extends JsonResource
                     'url' => $img->url,
                 ];
             }),
+            'createdAt' => $this->when(
+                $request->routeIs('admin.products.index'),
+                $this->created_at,
+            ),
+            'discountPercent' => $this->when(
+                $request->routeIs('admin.products.show'),
+                $this->discount_percent ?? Product::MIN_DISCOUNT
+            ),
         ];
     }
 }

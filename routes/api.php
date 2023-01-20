@@ -22,8 +22,10 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 
 /* User Routes */
 // products
-Route::get('/products', [ProductController::class, 'index']);
-Route::get('/products/{product:nanoid}', [ProductController::class, 'show']);
+Route::get('/products', [ProductController::class, 'index'])
+    ->name('products.index');
+Route::get('/products/{product:nanoid}', [ProductController::class, 'show'])
+    ->name('products.show');
 
 // options
 Route::get('/options/product-filters', [OptionController::class, 'productFilters']);

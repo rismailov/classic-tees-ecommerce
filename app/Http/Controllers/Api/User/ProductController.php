@@ -5,9 +5,10 @@ namespace App\Http\Controllers\Api\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\User\Products\GetProductsRequest;
 use App\Http\Resources\Api\ProductResource;
-use App\Http\Resources\Api\ProductsResource;
+use App\Models\Discount;
 use App\Models\Product;
 use F9Web\ApiResponseHelpers;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -22,7 +23,7 @@ class ProductController extends Controller
     {
         $v = fn (string $key) => $request->validated($key);
 
-        $products = Product::with(['sizes', 'images'])
+        $products = Product::with(['sizes', 'images', 'colours'])
             ->when($v('categories'), function ($q) use ($v) {
                 $q->whereIn('category', $v('categories'));
             })
@@ -36,12 +37,12 @@ class ProductController extends Controller
                     $sub->whereIn('colours.id', $v('colours'));
                 });
             })
-            ->when($v('onSale') === true, fn ($q) => $q->whereIsDiscounted(true))
+            ->when($v('onSale'), fn ($q) => $q->whereIsDiscounted(true))
             ->when($v('minPrice'), function ($q) use ($v) {
-                $q->where('price', '>=', $v('minPrice'));
+                $q->whereRaw('LEAST(price, COALESCE(discount_price, price)) >= '.$v('minPrice'));
             })
             ->when($v('maxPrice'), function ($q) use ($v) {
-                $q->where('price', '<=', $v('maxPrice'));
+                $q->whereRaw('LEAST(price, COALESCE(discount_price, price)) <= '.$v('maxPrice'));
             })
             ->when($v('sort'), function ($q) use ($v) {
                 [$key, $value] = explode('-', $v('sort'));
@@ -52,7 +53,7 @@ class ProductController extends Controller
             ->paginate($v('limit'));
 
         return $this->respondWithSuccess(
-            ProductsResource::collection($products)
+            ProductResource::collection($products)
                 ->response()
                 ->getData(true)
         );

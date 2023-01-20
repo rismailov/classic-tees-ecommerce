@@ -16,10 +16,12 @@ return new class() extends Migration {
             $table->id();
             $table->string('nanoid')->unique();
             $table->string('name')->unique();
+            $table->text('description');
             $table->string('category');
             $table->unsignedDecimal('price', 9, 2);
             $table->boolean('is_discounted')->default(false);
             $table->tinyInteger('discount_percent')->nullable();
+            $table->unsignedDecimal('discount_price', 9, 2)->nullable();
             $table->timestamps();
         });
     }

@@ -5,12 +5,14 @@ use App\Http\Controllers\Api\Admin\ProductController;
 use App\Http\Controllers\Api\Admin\ProductImagesController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('/admin')->group(function () {
+Route::prefix('/admin')->as('admin.')->group(function () {
     // Products
-    Route::prefix('/products')->group(function () {
-        Route::get('/', [ProductController::class, 'index']);
+    Route::prefix('/products')->as('products.')->group(function () {
+        Route::get('/', [ProductController::class, 'index'])
+            ->name('index');
         Route::get('/property-options', [ProductController::class, 'propertyOptions']);
-        Route::get('/{product}', [ProductController::class, 'show']);
+        Route::get('/{product}', [ProductController::class, 'show'])
+            ->name('show');
         Route::patch('/{product}', [ProductController::class, 'update']);
         Route::post('/', [ProductController::class, 'store']);
 

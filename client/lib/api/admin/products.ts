@@ -2,10 +2,10 @@ import axios from '@/lib/axios'
 import { StoreProductDto } from '@/types/api/dto/products/store-product.dto'
 import { UpdateProductDto } from '@/types/api/dto/products/update-product.dto'
 import { TJsonResponse } from '@/types/api/json-response.type'
-import { ProductEntity } from '@/types/entities/product.entity'
+import { AdminProductEntity } from '@/types/entities/product.entity'
 
 export const getProducts = async () =>
-    await axios.get<any, ProductEntity[]>('/admin/products')
+    await axios.get<any, AdminProductEntity[]>('/admin/products')
 
 // Get available product properties
 type TOptions = {
@@ -32,7 +32,7 @@ export const getPropertyOptions = async () => {
 }
 
 export const storeProduct = async (dto: StoreProductDto) =>
-    await axios.post<any, TJsonResponse & { product: ProductEntity }>(
+    await axios.post<any, TJsonResponse & { product: AdminProductEntity }>(
         '/admin/products',
         dto,
         {
@@ -56,4 +56,4 @@ export const updateProductAction = async ({
 }
 
 export const showProduct = async (id: string) =>
-    await axios.get<any, ProductEntity>(`/admin/products/${id}`)
+    await axios.get<any, AdminProductEntity>(`/admin/products/${id}`)

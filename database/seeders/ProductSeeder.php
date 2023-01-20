@@ -29,11 +29,12 @@ class ProductSeeder extends Seeder
         $products = [
             // Activewear
             [
-                'name'     => 'White Active Crew Neck',
-                'price'    => 30,
-                'category' => ProductCategoryEnum::ACTIVEWEAR->value,
-                'colour'   => 'white',
-                'sizeIds'  => [
+                'name'        => 'White Active Crew Neck',
+                'description' => 'White Active Crew Neck',
+                'price'       => 30,
+                'category'    => ProductCategoryEnum::ACTIVEWEAR->value,
+                'colour'      => 'white',
+                'sizeIds'     => [
                     $sizes['s'],
                     $sizes['m'],
                     $sizes['xl'],
@@ -43,11 +44,12 @@ class ProductSeeder extends Seeder
             ],
 
             [
-                'name'     => 'Burgundy Active Crew Neck',
-                'price'    => 25.50,
-                'category' => ProductCategoryEnum::ACTIVEWEAR->value,
-                'colour'   => 'burgundy',
-                'sizeIds'  => [
+                'name'        => 'Burgundy Active Crew Neck',
+                'description' => 'Burgundy Active Crew Neck',
+                'price'       => 25.50,
+                'category'    => ProductCategoryEnum::ACTIVEWEAR->value,
+                'colour'      => 'burgundy',
+                'sizeIds'     => [
                     $sizes['s'],
                     $sizes['m'],
                     $sizes['l'],
@@ -58,11 +60,12 @@ class ProductSeeder extends Seeder
 
             // Polo
             [
-                'name'     => 'Navy Polo',
-                'price'    => 40.00,
-                'category' => ProductCategoryEnum::POLO->value,
-                'colour'   => 'navy',
-                'sizeIds'  => [
+                'name'        => 'Navy Polo',
+                'description' => 'Navy Polo',
+                'price'       => 40.00,
+                'category'    => ProductCategoryEnum::POLO->value,
+                'colour'      => 'navy',
+                'sizeIds'     => [
                     $sizes['s'],
                     $sizes['l'],
                     $sizes['xl'],
@@ -71,11 +74,12 @@ class ProductSeeder extends Seeder
             ],
 
             [
-                'name'     => 'Military Beige Polo',
-                'price'    => 35.00,
-                'category' => ProductCategoryEnum::POLO->value,
-                'colour'   => 'military-beige',
-                'sizeIds'  => [
+                'name'        => 'Military Beige Polo',
+                'description' => 'Military Beige Polo',
+                'price'       => 35.00,
+                'category'    => ProductCategoryEnum::POLO->value,
+                'colour'      => 'military-beige',
+                'sizeIds'     => [
                     $sizes['s'],
                     $sizes['l'],
                     $sizes['xl'],
@@ -85,11 +89,12 @@ class ProductSeeder extends Seeder
 
             // V-Neck
             [
-                'name'     => 'Black V-Neck T-Shirt',
-                'price'    => 25.00,
-                'category' => ProductCategoryEnum::V_NECK->value,
-                'colour'   => 'black',
-                'sizeIds'  => [
+                'name'        => 'Black V-Neck T-Shirt',
+                'description' => 'Black V-Neck T-Shirt',
+                'price'       => 25.00,
+                'category'    => ProductCategoryEnum::V_NECK->value,
+                'colour'      => 'black',
+                'sizeIds'     => [
                     $sizes['s'],
                     $sizes['l'],
                     $sizes['xl'],
@@ -116,11 +121,12 @@ class ProductSeeder extends Seeder
             try {
                 DB::transaction(function () use ($product, $colours, $idx) {
                     $created = Product::create([
-                        'name'       => $product['name'],
-                        'price'      => $product['price'],
-                        'category'   => $product['category'],
-                        'created_at' => now()->addHours($idx),
-                        'updated_at' => now()->addHours($idx),
+                        'name'        => $product['name'],
+                        'description' => $product['description'],
+                        'price'       => $product['price'],
+                        'category'    => $product['category'],
+                        'created_at'  => now()->addHours($idx),
+                        'updated_at'  => now()->addHours($idx),
                     ]);
 
                     $created->sizes()->sync($product['sizeIds']);

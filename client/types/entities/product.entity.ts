@@ -1,21 +1,26 @@
+import type { Option } from '@/types/option.type'
+
 export interface ProductEntity {
     id: number
     nanoid: string
     name: string
-    category: {
-        value: string
-        label: string
-    }
+    description: string
+    category: Option
     price: {
         initial: string
-        // if discounted price is null, then there's no discount
-        // i chose this approach because separate "isDiscounted" field is
-        // kinda redundant. For now its only usage is to check if product is discounted
-        discounted: string | null
+        discounted: string | null // null means no discount
     }
-    colour: { value: string; label: string }
-    colours: { value: string; label: string; hex: string }[]
-    sizes: { id: string; name: string }[]
+    colour: Option
+    colours: Option<{ hex: string }>[]
+    sizes: Option[]
+    images: {
+        id: number
+        url: string
+        order: number
+    }[]
+}
+
+export interface AdminProductEntity extends ProductEntity {
     createdAt: string
-    images: { id: number; url: string; order: number }[]
+    discountPercent: number
 }

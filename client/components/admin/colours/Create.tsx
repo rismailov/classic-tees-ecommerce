@@ -29,8 +29,6 @@ export const CreateColour = () => {
     })
 
     const onSubmit = (values: StoreColourDto) => {
-        // console.log(values)
-
         mutateAsync(values).then(() => {
             form.reset()
 

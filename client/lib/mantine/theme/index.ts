@@ -2,8 +2,8 @@ import { MantineThemeOverride } from '@mantine/core'
 import * as components from './components'
 
 const theme: MantineThemeOverride = {
-    primaryColor: 'orange',
-    primaryShade: 8,
+    primaryColor: 'indigo',
+    primaryShade: 6,
     loader: 'oval',
     cursorType: 'pointer',
     defaultGradient: { from: 'blue', to: 'teal', deg: 20 },
