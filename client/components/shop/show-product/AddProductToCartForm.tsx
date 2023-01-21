@@ -2,7 +2,7 @@ import { DarkButton } from '@/components/shop/styled/DarkButton'
 import { SIZE_LABELS } from '@/lib/constants'
 import useCartStore from '@/lib/store/cart.store'
 import useUiStore from '@/lib/store/ui.store'
-import { ProductEntity } from '@/types/entities/product.entity'
+import { UserProductEntity } from '@/types/entities/product.entity'
 import {
     ActionIcon,
     ColorSwatch,
@@ -13,6 +13,7 @@ import {
     UnstyledButton,
 } from '@mantine/core'
 import { useForm } from '@mantine/form'
+import Link from 'next/link'
 import { useStyles } from './AddProductToCartForm.styles'
 
 type AddProductToCartDto = {
@@ -23,7 +24,7 @@ type AddProductToCartDto = {
 export const AddProductToCartForm = ({
     product,
 }: {
-    product: ProductEntity
+    product: UserProductEntity
 }) => {
     const { classes, cx } = useStyles()
 
@@ -34,7 +35,10 @@ export const AddProductToCartForm = ({
 
     const form = useForm<AddProductToCartDto>({
         initialValues: {
-            size: product.sizes[0],
+            size: {
+                id: product.sizes[0].value,
+                name: product.sizes[0].label,
+            },
             colour: { id: product.colour.value, name: product.colour.label },
         },
     })
@@ -49,7 +53,7 @@ export const AddProductToCartForm = ({
             name: product.name,
             size,
             colour,
-            price: product.price,
+            price: product.price.discounted ?? product.price.initial,
             amount: thisItem ? thisItem.amount + 1 : 1,
         })
 
@@ -69,20 +73,23 @@ export const AddProductToCartForm = ({
                         <Group spacing={5}>
                             {product.sizes.map((size) => (
                                 <ActionIcon
-                                    key={size.id}
+                                    key={size.value}
                                     onClick={() =>
-                                        form.setFieldValue('size', size)
+                                        form.setFieldValue('size', {
+                                            id: size.value,
+                                            name: size.label,
+                                        })
                                     }
                                     size="lg"
                                     radius="xl"
                                     variant="outline"
                                     className={cx([
                                         classes.size,
-                                        size.id === form.values.size.id &&
+                                        size.value === form.values.size.id &&
                                             classes.selectedSize,
                                     ])}
                                 >
-                                    {size.name.toUpperCase()}
+                                    {size.label.toUpperCase()}
                                 </ActionIcon>
                             ))}
                         </Group>
@@ -93,16 +100,28 @@ export const AddProductToCartForm = ({
                 <Stack spacing={5}>
                     <Text weight={500}>Colour: {product.colour.label}</Text>
 
-                    <Group>
-                        {product.colours.map(({ value, label, hex }) => (
+                    <Group spacing={5}>
+                        {product.availableColours.map(({ nanoid, colour }) => (
                             <Tooltip
                                 withArrow
-                                key={value}
-                                label={label}
+                                key={nanoid}
+                                label={colour.label}
                                 position="bottom"
                             >
-                                <UnstyledButton>
-                                    <ColorSwatch color={hex} />
+                                <UnstyledButton
+                                    component={Link}
+                                    href={`/shop/${nanoid}`}
+                                    sx={(theme) => ({
+                                        border: `1px solid ${
+                                            nanoid === product.nanoid
+                                                ? 'gray'
+                                                : 'transparent'
+                                        }`,
+                                        borderRadius: theme.radius.xl,
+                                        padding: 2,
+                                    })}
+                                >
+                                    <ColorSwatch color={colour.hex} />
                                 </UnstyledButton>
                             </Tooltip>
                         ))}
@@ -110,7 +129,7 @@ export const AddProductToCartForm = ({
                 </Stack>
 
                 {/* add to cart */}
-                <DarkButton type="submit" mt="sm" w="50%">
+                <DarkButton type="submit" w="50%">
                     Add to cart
                 </DarkButton>
             </Stack>

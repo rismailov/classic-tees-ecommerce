@@ -66,6 +66,7 @@ class Product extends Model
             get: fn () => [
                 'value' => (string) $this->colours->first()->id,
                 'label' => __('models.colours.'.$this->colours->first()->value),
+                'hex'   => $this->colours->first()->hex_code,
             ]
         );
     }

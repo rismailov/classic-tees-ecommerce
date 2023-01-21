@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\User\Products\GetProductsRequest;
 use App\Http\Resources\Api\ProductResource;
+use App\Models\Colour;
 use App\Models\Discount;
 use App\Models\Product;
 use F9Web\ApiResponseHelpers;
@@ -67,8 +68,22 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
+        // available colours on products from the same category.
+        // this is needed for user to select a different colour
+        $product->availableColours = Product::with('colours')
+            ->select('id', 'nanoid')
+            ->where('category', $product->getRawOriginal('category'))
+            ->get()
+            ->map(function ($product) {
+                return [
+                    // nanoid needed for slug on client side
+                    'nanoid' => $product->nanoid,
+                    'colour' => $product->colour,
+                ];
+            });
+
         return $this->respondWithSuccess(
-            new ProductResource($product)
+            ProductResource::make($product)
         );
     }
 }

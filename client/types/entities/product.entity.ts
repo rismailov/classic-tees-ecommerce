@@ -20,6 +20,19 @@ export interface ProductEntity {
     }[]
 }
 
+// show product in app
+export interface UserProductEntity extends ProductEntity {
+    availableColours: {
+        nanoid: string
+        colour: {
+            value: string
+            label: string
+            hex: string
+        }
+    }[]
+}
+
+// show product in admin dashboard
 export interface AdminProductEntity extends ProductEntity {
     createdAt: string
     discountPercent: number

@@ -29,13 +29,20 @@ class ProductResource extends JsonResource
                 'label' => $this->category,
             ],
             'colour'  => $this->colour,
-            'colours' => $this->colours->map(function ($colour) {
-                return [
-                    'value' => (string) $colour->id,
-                    'label' => __('models.colours.'.$colour->value),
-                    'hex'   => $colour->hex_code,
-                ];
-            }),
+            'colours' => $this->when(
+                ! $request->routeIs('products.show'),
+                $this->colours->map(function ($colour) {
+                    return [
+                        'value' => (string) $colour->id,
+                        'label' => __('models.colours.'.$colour->value),
+                        'hex'   => $colour->hex_code,
+                    ];
+                })
+            ),
+            'availableColours' => $this->when(
+                $request->routeIs('products.show'),
+                $this->availableColours
+            ),
             'sizes' => $this->sizes
                 ->map(function ($size) {
                     return [

@@ -1,6 +1,9 @@
 import axios from '@/lib/axios'
 import { GetProductsDto } from '@/types/api/dto/products/get-products.dto'
-import { ProductEntity } from '@/types/entities/product.entity'
+import {
+    ProductEntity,
+    UserProductEntity,
+} from '@/types/entities/product.entity'
 import { FilterOptions } from '../store/filter-options.store'
 
 // Get products
@@ -17,4 +20,4 @@ export const getFilterOptions = async () =>
     await axios.get<any, FilterOptions>('options/product-filters')
 
 export const showProduct = async (nanoid: string) =>
-    await axios.get<any, ProductEntity>(`products/${nanoid}`)
+    await axios.get<any, UserProductEntity>(`products/${nanoid}`)
