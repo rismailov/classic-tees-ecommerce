@@ -1,6 +1,6 @@
 import { TJsonResponse } from '@/types/api/json-response.type'
 import { ColourEntity } from '@/types/entities/colour.entity'
-import { ActionIcon, Table } from '@mantine/core'
+import { Group, Table, UnstyledButton } from '@mantine/core'
 import { FiTrash } from '@react-icons/all-files/fi/FiTrash'
 import { UseMutateAsyncFunction } from 'react-query'
 
@@ -17,7 +17,7 @@ export const ColoursTable = ({
     >
 }) => {
     return (
-        <Table verticalSpacing={5}>
+        <Table verticalSpacing="xs" highlightOnHover>
             <thead>
                 <tr>
                     <th>ID</th>
@@ -32,13 +32,22 @@ export const ColoursTable = ({
                         <td>{c.id}</td>
                         <td>{c.value}</td>
                         <td>
-                            <ActionIcon
+                            <UnstyledButton
                                 onClick={() => deleteColour(c.id)}
-                                color="red"
-                                size="md"
+                                fz="sm"
+                                fw={500}
+                                sx={(theme) => ({
+                                    color: theme.fn.themeColor('red'),
+                                    ':hover': {
+                                        color: theme.colors.dark[5],
+                                    },
+                                })}
                             >
-                                <FiTrash size={16} />
-                            </ActionIcon>
+                                <Group spacing={5}>
+                                    Remove
+                                    <FiTrash size={16} />
+                                </Group>
+                            </UnstyledButton>
                         </td>
                     </tr>
                 ))}

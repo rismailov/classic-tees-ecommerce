@@ -5,16 +5,7 @@ import { Header } from '../app/Header'
 
 export const AppLayout = ({ children }: { children: ReactNode }) => {
     return (
-        <Box
-            id="wrapper"
-            sx={(theme) => ({
-                position: 'relative',
-                paddingTop: 60,
-                minHeight: '100vh',
-                height: '100%',
-                background: theme.white,
-            })}
-        >
+        <Box id="wrapper" pos="relative" py={80} mih="100vh" h="100%">
             <Header />
 
             <Cart />

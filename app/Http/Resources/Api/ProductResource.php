@@ -53,8 +53,11 @@ class ProductResource extends JsonResource
                 $request->routeIs('products.index'),
                 $this->reviews_count
             ),
-            'averageStars' => $this->reviews->avg('stars'),
-            'sizes'        => $this->sizes
+            'averageStars' => $this->when(
+                $request->routeIs('products.index') || $request->routeIs('products.show'),
+                $this->reviews->avg('stars'),
+            ),
+            'sizes' => $this->sizes
                 ->map(function ($size) {
                     return [
                         // NOTE: casting as string is needed for mantine checkboxes/selects to work properly

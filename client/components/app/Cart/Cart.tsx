@@ -10,11 +10,11 @@ import {
     ActionIcon,
     Box,
     Divider,
+    Button,
 } from '@mantine/core'
 import { AnimatePresence, motion } from 'framer-motion'
 import { CartItem } from './CartItem'
 import { FiX } from '@react-icons/all-files/fi/FiX'
-import { DarkButton } from '@/components/shop/styled/DarkButton'
 import { FiBox } from 'react-icons/fi'
 
 export const Cart = () => {
@@ -143,7 +143,14 @@ export const Cart = () => {
                         </Group>
                     </Group>
 
-                    <DarkButton disabled={!items.length}>Checkout</DarkButton>
+                    <Button
+                        color="dark"
+                        fz="md"
+                        size="lg"
+                        disabled={!items.length}
+                    >
+                        Checkout
+                    </Button>
 
                     <Divider
                         sx={(theme) => ({

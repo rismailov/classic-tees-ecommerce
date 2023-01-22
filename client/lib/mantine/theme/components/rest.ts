@@ -17,8 +17,6 @@ import {
     Styles,
     TableProps,
     TableStylesParams,
-    TitleProps,
-    TitleStylesParams,
     TooltipProps,
     TooltipStylesNames,
     TooltipStylesParams,

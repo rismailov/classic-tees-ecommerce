@@ -1,9 +1,9 @@
-import { ImageDropzone } from '@/components/admin/products/ShowProduct/upload-new-images/ImageDropzone'
 import { ProductFormCommon } from '@/components/admin/products/ProductFormCommon'
+import { ImageDropzone } from '@/components/admin/products/show/UploadNewImages/ImageDropzone'
 import { PageLayout } from '@/components/layouts/admin/PageLayout'
 import { storeProduct } from '@/lib/api/admin/products'
 import { StoreProductDto } from '@/types/api/dto/products/store-product.dto'
-import { Button, Card, Stack, useMantineColorScheme } from '@mantine/core'
+import { Button, Card, Container, Stack } from '@mantine/core'
 import { FileWithPath } from '@mantine/dropzone'
 import { useForm } from '@mantine/form'
 import { useRouter } from 'next/router'
@@ -41,8 +41,6 @@ export default function CreateProduct() {
         },
     )
 
-    const { colorScheme } = useMantineColorScheme()
-
     const onDrop = (files: FileWithPath[]) => {
         form.setValues({
             ...form.values,
@@ -58,7 +56,7 @@ export default function CreateProduct() {
     }
 
     return (
-        <Card p="xl" maw={500}>
+        <Card p="xl" maw={500} withBorder>
             <form onSubmit={form.onSubmit((data) => mutateAsync(data))}>
                 <Stack>
                     <ProductFormCommon form={form} />
@@ -75,7 +73,6 @@ export default function CreateProduct() {
                         fullWidth
                         h={45}
                         loading={isFormSubmitting}
-                        variant={colorScheme === 'dark' ? 'light' : 'filled'}
                     >
                         Save
                     </Button>
@@ -86,9 +83,14 @@ export default function CreateProduct() {
 }
 
 CreateProduct.getLayout = (page: ReactElement) => (
-    <PageLayout
-        breadcrumbs={[{ label: 'Products', href: '/admin/products' }, 'Create']}
-    >
-        {page}
-    </PageLayout>
+    <Container>
+        <PageLayout
+            breadcrumbs={[
+                { label: 'Products', href: '/admin/products' },
+                'Create',
+            ]}
+        >
+            {page}
+        </PageLayout>
+    </Container>
 )

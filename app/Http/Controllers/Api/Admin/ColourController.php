@@ -69,6 +69,12 @@ class ColourController extends Controller
      */
     public function destroy(Colour $colour)
     {
+        if ($colour->products()->count()) {
+            return $this->respondError(
+                __('responses.colours.cant_delete')
+            );
+        }
+
         $colour->delete();
 
         return $this->respondWithSuccess([

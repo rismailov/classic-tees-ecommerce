@@ -2,13 +2,7 @@ import { ProductsTable } from '@/components/admin/products/ProductsTable'
 import { PageLayout } from '@/components/layouts/admin/PageLayout'
 import { getProducts } from '@/lib/api/admin/products'
 import { REACT_QUERY_PRODUCTS_KEY } from '@/lib/constants'
-import {
-    Button,
-    Card,
-    Loader,
-    Text,
-    useMantineColorScheme,
-} from '@mantine/core'
+import { Button, Card, Container, Loader, Text } from '@mantine/core'
 import Link from 'next/link'
 import { useQuery } from 'react-query'
 
@@ -19,32 +13,28 @@ export default function ProductsIndex() {
         { refetchOnWindowFocus: false },
     )
 
-    const { colorScheme } = useMantineColorScheme()
-
     return (
-        <PageLayout
-            breadcrumbs={['Products']}
-            rightSide={
-                <Button
-                    component={Link}
-                    href="/admin/products/create"
-                    variant={colorScheme === 'dark' ? 'light' : 'filled'}
-                >
-                    Create
-                </Button>
-            }
-        >
-            <Card>
-                {isLoading && <Loader />}
+        <Container>
+            <PageLayout
+                breadcrumbs={['Products']}
+                rightSide={
+                    <Button component={Link} href="/admin/products/create">
+                        Create
+                    </Button>
+                }
+            >
+                <Card withBorder>
+                    {isLoading && <Loader />}
 
-                {products && !products.length && (
-                    <Text>No records found...</Text>
-                )}
+                    {products && !products.length && (
+                        <Text>No records found...</Text>
+                    )}
 
-                {products && !!products.length && (
-                    <ProductsTable products={products} />
-                )}
-            </Card>
-        </PageLayout>
+                    {products && !!products.length && (
+                        <ProductsTable products={products} />
+                    )}
+                </Card>
+            </PageLayout>
+        </Container>
     )
 }

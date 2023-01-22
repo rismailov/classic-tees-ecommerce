@@ -19,7 +19,7 @@ export const PageLayout = ({
     rightSide?: ReactNode
 }) => {
     return (
-        <Stack>
+        <Stack spacing="xs">
             {/* Header */}
             <Group
                 position="apart"

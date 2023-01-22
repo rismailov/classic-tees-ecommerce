@@ -9,4 +9,8 @@ return [
         'uploaded' => ':Model successfully uploaded.',
         'changed'  => ':Model successfully changed.',
     ],
+
+    'colours' => [
+        'cant_delete' => "Can't delete this colour. It has products attached to it.",
+    ],
 ];

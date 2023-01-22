@@ -10,8 +10,8 @@ export const SectionLayout = ({
     children: ReactNode
 } & CardProps) => {
     return (
-        <Card radius="xl" shadow="xl" p="xl" {...rest}>
-            <Title mb="md" order={4} opacity={0.4} weight={500}>
+        <Card withBorder p="xl" {...rest}>
+            <Title mb="md" order={4} opacity={0.4}>
                 {title}
             </Title>
 

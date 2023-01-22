@@ -10,8 +10,8 @@ import { Reorder, useMotionValue } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
 import { BsLightbulb } from 'react-icons/bs'
 import { useMutation, useQueryClient } from 'react-query'
-import { SectionLayout } from '../../SectionLayout'
-import { CurrentImage } from './edit-product-images/CurrentImage'
+import { SectionLayout } from '../../../SectionLayout'
+import { CurrentImage } from './CurrentImage'
 
 export const EditProductImages = (product: AdminProductEntity) => {
     const queryClient = useQueryClient()

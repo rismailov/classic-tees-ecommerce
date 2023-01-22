@@ -1,7 +1,7 @@
 import { SimpleGrid, Stack, Text } from '@mantine/core'
 import { Dropzone, FileWithPath, IMAGE_MIME_TYPE } from '@mantine/dropzone'
 import { ReactNode } from 'react'
-import { ImagePreview } from '../../show/product-images/ImagePreview'
+import { ImagePreview } from './ImagePreview'
 
 export const ImageDropzone = ({
     onDrop,

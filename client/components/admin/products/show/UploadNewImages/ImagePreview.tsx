@@ -1,4 +1,4 @@
-import { ActionIcon, Box, Group, Image } from '@mantine/core'
+import { Box, Group, Image } from '@mantine/core'
 import { FileWithPath } from '@mantine/dropzone'
 import { FiStar, FiTrash } from 'react-icons/fi'
 import { ImageActionButton } from '../../images/ImageActionButton'

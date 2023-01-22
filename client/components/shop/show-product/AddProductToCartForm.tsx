@@ -130,6 +130,7 @@ export const AddProductToCartForm = ({
 
                 {/* add to cart */}
                 <Button
+                    type="submit"
                     size="lg"
                     color="dark"
                     radius="xl"

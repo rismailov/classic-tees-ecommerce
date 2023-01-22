@@ -7,8 +7,8 @@ import { FileWithPath } from '@mantine/dropzone'
 import { useForm } from '@mantine/form'
 import React from 'react'
 import { useMutation, useQueryClient } from 'react-query'
-import { SectionLayout } from '../../SectionLayout'
-import { ImageDropzone } from './upload-new-images/ImageDropzone'
+import { SectionLayout } from '../../../SectionLayout'
+import { ImageDropzone } from './ImageDropzone'
 
 export const UploadNewImages = (product: AdminProductEntity) => {
     const queryClient = useQueryClient()
