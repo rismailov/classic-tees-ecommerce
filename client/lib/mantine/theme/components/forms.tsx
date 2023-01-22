@@ -2,6 +2,8 @@ import {
     CheckboxProps,
     CheckboxStylesNames,
     CheckboxStylesParams,
+    ColorInputProps,
+    ColorInputStylesNames,
     MultiSelectProps,
     MultiSelectStylesNames,
     MultiSelectStylesParams,
@@ -204,4 +206,12 @@ export const Textarea: ThemeComponent<TextareaProps, Styles<string>> = {
             },
         },
     }),
+}
+
+export const ColorInput: ThemeComponent<
+    ColorInputProps,
+    Styles<ColorInputStylesNames>
+> = {
+    defaultProps: defaultProps.input,
+    styles: inputStyles,
 }

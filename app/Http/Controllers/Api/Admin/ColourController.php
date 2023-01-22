@@ -3,11 +3,16 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Admin\Colours\StoreColourRequest;
+use App\Http\Resources\Api\Admin\ColourResource;
 use App\Models\Colour;
+use F9Web\ApiResponseHelpers;
 use Illuminate\Http\Request;
 
 class ColourController extends Controller
 {
+    use ApiResponseHelpers;
+
     /**
      * Display a listing of the resource.
      *
@@ -15,8 +20,10 @@ class ColourController extends Controller
      */
     public function index()
     {
-        return response()->json(
-            Colour::select(['id', 'value'])->get()
+        return $this->respondWithSuccess(
+            ColourResource::collection(
+                Colour::select(['id', 'value'])->get()
+            )
         );
     }
 
@@ -26,42 +33,20 @@ class ColourController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreColourRequest $request)
     {
-        $validated = $request->validate([
-            'colours'   => ['required', 'unique:colours,value'],
-            'colours.*' => ['unique:colours,value'],
-        ]);
-
-        foreach ($validated['colours'] as $colour) {
-            Colour::create(['value' => $colour]);
+        foreach ($request->validated('colours') as $colour) {
+            Colour::create([
+                'value'    => $colour['value'],
+                'hex_code' => $colour['hexCode'],
+            ]);
         }
 
-        return response()->json([
-            'message' => 'Colours stored successfully.',
+        return $this->respondWithSuccess([
+            'message' => __('responses.crud.saved', [
+                'model' => __('models.colours.multiple'),
+            ]),
         ]);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Colour  $colour
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Colour $colour)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Colour  $colour
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Colour $colour)
-    {
-        //
     }
 
     /**
@@ -86,6 +71,10 @@ class ColourController extends Controller
     {
         $colour->delete();
 
-        return response()->json(['message' => 'Delete success']);
+        return $this->respondWithSuccess([
+            'message' => __('responses.crud.deleted', [
+                'model' => __('models.colours.single'),
+            ]),
+        ]);
     }
 }

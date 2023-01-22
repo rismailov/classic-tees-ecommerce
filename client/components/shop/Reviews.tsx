@@ -41,7 +41,7 @@ export const Reviews = ({
             </Group>
 
             <Text size="xs" mt={3} weight={600}>
-                {reviewsCount} Reviews
+                {reviewsCount} {`${reviewsCount === 1 ? 'Review' : 'Reviews'}`}
             </Text>
         </Group>
     )

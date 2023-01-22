@@ -48,7 +48,7 @@ class Product extends Model
      *
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
-    public function category(): Attribute
+    protected function category(): Attribute
     {
         return Attribute::make(
             get: fn ($value) => __('models.categories.'.$value)
@@ -60,12 +60,12 @@ class Product extends Model
      *
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
-    public function colour(): Attribute
+    protected function colour(): Attribute
     {
         return Attribute::make(
             get: fn () => [
                 'value' => (string) $this->colours->first()->id,
-                'label' => __('models.colours.'.$this->colours->first()->value),
+                'label' => __('models.colours.values.'.$this->colours->first()->value),
                 'hex'   => $this->colours->first()->hex_code,
             ]
         );

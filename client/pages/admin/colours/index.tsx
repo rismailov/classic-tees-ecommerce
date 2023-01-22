@@ -1,11 +1,12 @@
+import { ColoursTable } from '@/components/admin/colours/ColoursTable'
+import { CreateColourForm } from '@/components/admin/colours/CreateColourForm'
+import { SectionLayout } from '@/components/admin/SectionLayout'
 import { PageLayout } from '@/components/layouts/admin/PageLayout'
-import { removeColour, getColours } from '@/lib/api/admin/colours'
-import { ActionIcon, Card, Table, Text } from '@mantine/core'
+import { getColours, removeColour } from '@/lib/api/admin/colours'
+import { REACT_QUERY_COLOURS_KEY } from '@/lib/constants'
+import { Group, Text } from '@mantine/core'
 import { ReactElement } from 'react'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
-import { CreateColour } from '@/components/admin/colours/Create'
-import { REACT_QUERY_COLOURS_KEY } from '@/lib/constants'
-import { FiTrash } from 'react-icons/fi'
 
 export default function ColoursIndex() {
     const queryClient = useQueryClient()
@@ -34,42 +35,18 @@ export default function ColoursIndex() {
     }
 
     return (
-        <Card sx={{ maxWidth: 600 }}>
-            <Table verticalSpacing={5}>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Colour</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
+        <Group align="start">
+            <SectionLayout title="Colours" sx={{ flex: 1 }}>
+                <ColoursTable colours={colours} deleteColour={deleteColour} />
+            </SectionLayout>
 
-                <tbody>
-                    {colours.map((c) => (
-                        <tr key={c.id}>
-                            <td>{c.id}</td>
-                            <td>{c.value}</td>
-                            <td>
-                                <ActionIcon
-                                    onClick={() => deleteColour(c.id)}
-                                    color="red"
-                                    size="md"
-                                >
-                                    <FiTrash size={16} />
-                                </ActionIcon>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </Table>
-        </Card>
+            <SectionLayout title="Add colour" w={400}>
+                <CreateColourForm />
+            </SectionLayout>
+        </Group>
     )
 }
 
 ColoursIndex.getLayout = (page: ReactElement) => (
-    <PageLayout breadcrumbs={['Colours']}>
-        {page}
-
-        <CreateColour />
-    </PageLayout>
+    <PageLayout breadcrumbs={['Colours']} children={page} />
 )

@@ -4,20 +4,25 @@ use App\Enums\ProductCategoryEnum;
 
 return [
     'colours' => [
-        'white'          => 'White',
-        'black'          => 'Black',
-        'yellow'         => 'Yellow',
-        'light-gray'     => 'Light gray',
-        'navy'           => 'Navy',
-        'military-beige' => 'Military beige',
-        'raspberry'      => 'Raspberry',
-        'dark-purple'    => 'Dark purple',
-        'dusty-pink'     => 'Dusty pink',
-        'electric-blue'  => 'Electric blue',
-        'emerald'        => 'Emerald',
-        'burgundy'       => 'Burgundy',
-        'sage'           => 'Sage',
-        'gray'           => 'Gray',
+        'single' => 'Colour',
+        'multiple' => 'Colours',
+
+        'values' => [
+            'white'          => 'White',
+            'black'          => 'Black',
+            'yellow'         => 'Yellow',
+            'light-gray'     => 'Light gray',
+            'navy'           => 'Navy',
+            'military-beige' => 'Military beige',
+            'raspberry'      => 'Raspberry',
+            'dark-purple'    => 'Dark purple',
+            'dusty-pink'     => 'Dusty pink',
+            'electric-blue'  => 'Electric blue',
+            'emerald'        => 'Emerald',
+            'burgundy'       => 'Burgundy',
+            'sage'           => 'Sage',
+            'gray'           => 'Gray',
+        ],
     ],
 
     'categories' => [

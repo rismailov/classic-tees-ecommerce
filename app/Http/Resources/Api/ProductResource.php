@@ -28,13 +28,13 @@ class ProductResource extends JsonResource
                 'value' => $this->getRawOriginal('category'),
                 'label' => $this->category,
             ],
-            'colour'       => $this->colour,
-            'colours'      => $this->when(
+            'colour'  => $this->colour,
+            'colours' => $this->when(
                 ! $request->routeIs('products.show'),
                 $this->colours->map(function ($colour) {
                     return [
                         'value' => (string) $colour->id,
-                        'label' => __('models.colours.'.$colour->value),
+                        'label' => __('models.colours.values.'.$colour->value),
                         'hex'   => $colour->hex_code,
                     ];
                 })
@@ -54,7 +54,7 @@ class ProductResource extends JsonResource
                 $this->reviews_count
             ),
             'averageStars' => $this->reviews->avg('stars'),
-            'sizes' => $this->sizes
+            'sizes'        => $this->sizes
                 ->map(function ($size) {
                     return [
                         // NOTE: casting as string is needed for mantine checkboxes/selects to work properly

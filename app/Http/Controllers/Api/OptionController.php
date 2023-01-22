@@ -29,7 +29,7 @@ class OptionController extends Controller
                 ->map(function ($colour) {
                     return [
                         'value' => (string) $colour->id,
-                        'label' => __('models.colours.'.$colour->value),
+                        'label' => __('models.colours.values.'.$colour->value),
                         'hex'   => $colour->hex_code,
                     ];
                 }),

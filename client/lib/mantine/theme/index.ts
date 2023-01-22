@@ -3,7 +3,7 @@ import * as components from './components'
 
 const theme: MantineThemeOverride = {
     primaryColor: 'indigo',
-    primaryShade: 6,
+    primaryShade: 7,
     loader: 'oval',
     cursorType: 'pointer',
     defaultGradient: { from: 'blue', to: 'teal', deg: 20 },
