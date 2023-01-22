@@ -11,7 +11,6 @@ import {
 import { useForm } from '@mantine/form'
 import { useMutation, useQueryClient } from 'react-query'
 import { randomId } from '@mantine/hooks'
-import { FiCheckCircle } from '@react-icons/all-files/fi/FiCheckCircle'
 import { FiTrash } from '@react-icons/all-files/fi/FiTrash'
 import { FiPlus } from '@react-icons/all-files/fi/FiPlus'
 import { StoreColourDto } from '@/types/api/dto/colours/store-colour.dto'
@@ -115,12 +114,12 @@ export const CreateColourForm = () => {
                 type="submit"
                 disabled={
                     isLoading ||
+                    !form.values.colours.length ||
                     form.values.colours.map((c) => c.value).some((v) => !v)
                 }
                 mt="md"
                 color="teal"
                 sx={{ alignSelf: 'start' }}
-                leftIcon={<FiCheckCircle size={15} />}
                 loading={isLoading}
             >
                 Save

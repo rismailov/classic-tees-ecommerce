@@ -5,19 +5,23 @@ import { PageLayout } from '@/components/layouts/admin/PageLayout'
 import { useToast } from '@/hooks/use-toast'
 import { getColours, removeColour } from '@/lib/api/admin/colours'
 import { REACT_QUERY_COLOURS_KEY } from '@/lib/constants'
-import { Container, Group, Text } from '@mantine/core'
+import { Center, Container, Group, Pagination, Text } from '@mantine/core'
 import axios from 'axios'
-import { ReactElement } from 'react'
+import { ReactElement, useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 
 export default function ColoursIndex() {
     const queryClient = useQueryClient()
     const { showError } = useToast()
 
-    const { data: colours, isLoading: isColoursLoading } = useQuery(
-        REACT_QUERY_COLOURS_KEY,
-        getColours,
-    )
+    // pagination
+    const [page, setPage] = useState(1)
+
+    const { data: colours, isLoading: isColoursLoading } = useQuery({
+        queryKey: [REACT_QUERY_COLOURS_KEY, { page }],
+        queryFn: () => getColours({ page }),
+    })
+
     const { mutateAsync: deleteColour } = useMutation(removeColour, {
         onSuccess: () => {
             queryClient.invalidateQueries(REACT_QUERY_COLOURS_KEY)
@@ -38,14 +42,25 @@ export default function ColoursIndex() {
         return <Text color="red">Something went wrong fetching colours...</Text>
     }
 
-    if (!colours.length) {
+    if (!colours.meta.total) {
         return <Text color="dimmed">There are no records yet...</Text>
     }
 
     return (
         <Group align="start">
             <SectionLayout title="Colours" sx={{ flex: 1 }}>
-                <ColoursTable colours={colours} deleteColour={deleteColour} />
+                <ColoursTable
+                    colours={colours.data}
+                    deleteColour={deleteColour}
+                />
+
+                <Center mt="xl">
+                    <Pagination
+                        page={colours.meta.current_page}
+                        onChange={setPage}
+                        total={colours.meta.last_page}
+                    />
+                </Center>
             </SectionLayout>
 
             <SectionLayout title="Add colour" w={400}>

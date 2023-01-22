@@ -20,10 +20,10 @@ class ColourController extends Controller
      */
     public function index()
     {
-        return $this->respondWithSuccess(
+        return response()->json(
             ColourResource::collection(
-                Colour::select(['id', 'value'])->get()
-            )
+                Colour::select(['id', 'value'])->paginate(10)
+            )->response()->getData()
         );
     }
 
