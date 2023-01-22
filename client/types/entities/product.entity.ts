@@ -1,6 +1,8 @@
 import type { Option } from '@/types/option.type'
+import { TPaginatedData } from '../api/paginated-data.type'
+import { ReviewEntity } from './review.entity'
 
-export interface ProductEntity {
+interface ProductEntityBase {
     id: number
     nanoid: string
     name: string
@@ -20,8 +22,15 @@ export interface ProductEntity {
     }[]
 }
 
-// show product in app
-export interface UserProductEntity extends ProductEntity {
+/**
+ * Slightly modified interfaces for each route action.
+ */
+export interface UserProductIndexEntity extends ProductEntityBase {
+    reviewsCount: number
+    averageStars: number
+}
+
+export interface UserProductShowEntity extends ProductEntityBase {
     availableColours: {
         nanoid: string
         colour: {
@@ -30,10 +39,11 @@ export interface UserProductEntity extends ProductEntity {
             hex: string
         }
     }[]
+    reviews: TPaginatedData<ReviewEntity[]>
+    averageStars: number
 }
 
-// show product in admin dashboard
-export interface AdminProductEntity extends ProductEntity {
+export interface AdminProductEntity extends ProductEntityBase {
     createdAt: string
     discountPercent: number
 }

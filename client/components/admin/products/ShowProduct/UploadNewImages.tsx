@@ -1,7 +1,7 @@
 import { uploadImagesAction } from '@/lib/api/admin/product-images'
 import { REACT_QUERY_PRODUCTS_KEY } from '@/lib/constants'
 import { StoreProductDto } from '@/types/api/dto/products/store-product.dto'
-import { ProductEntity } from '@/types/entities/product.entity'
+import { AdminProductEntity } from '@/types/entities/product.entity'
 import { Button, Card, Stack, Title } from '@mantine/core'
 import { FileWithPath } from '@mantine/dropzone'
 import { useForm } from '@mantine/form'
@@ -10,7 +10,7 @@ import { useMutation, useQueryClient } from 'react-query'
 import { SectionLayout } from '../../SectionLayout'
 import { ImageDropzone } from './upload-new-images/ImageDropzone'
 
-export const UploadNewImages = (product: ProductEntity) => {
+export const UploadNewImages = (product: AdminProductEntity) => {
     const queryClient = useQueryClient()
 
     const form = useForm<Pick<StoreProductDto, 'images'>>({

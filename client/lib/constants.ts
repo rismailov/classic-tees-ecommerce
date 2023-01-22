@@ -1,11 +1,12 @@
 import { Option } from '@/types/option.type'
 
-// react-query
+// React Query keys
+// https://tanstack.com/query/v4/docs/react/guides/query-keys
 export const REACT_QUERY_AUTH_KEY = 'auth-user'
 export const REACT_QUERY_COLOURS_KEY = 'colours'
 export const REACT_QUERY_PRODUCTS_KEY = 'products'
 
-// Products
+// Products categories (static for now)
 export const CATEGORIES: Option[] = [
     { value: 'polo', label: 'Polo' },
     { value: 'v-neck', label: 'V-Neck' },

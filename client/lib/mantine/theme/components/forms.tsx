@@ -15,6 +15,7 @@ import {
     SelectProps,
     SelectStylesNames,
     Styles,
+    TextareaProps,
     TextInputProps,
     TextInputStylesNames,
 } from '@mantine/core'
@@ -178,6 +179,29 @@ export const PasswordInput: ThemeComponent<
 
         visibilityToggle: {
             marginRight: 5,
+        },
+    }),
+}
+
+export const Textarea: ThemeComponent<TextareaProps, Styles<string>> = {
+    defaultProps: {
+        ...defaultProps.input,
+    },
+
+    styles: (theme, params) => ({
+        input: {
+            transition: 'none',
+
+            '&:focus-within': {
+                boxShadow: `0 0 0 0.05rem ${theme.fn.primaryColor()}`,
+
+                // @ts-ignore (variant doesn't exist altho it does)
+                ...(params.variant &&
+                    // @ts-ignore
+                    params.variant === 'filled' && {
+                        backgroundColor: theme.white,
+                    }),
+            },
         },
     }),
 }

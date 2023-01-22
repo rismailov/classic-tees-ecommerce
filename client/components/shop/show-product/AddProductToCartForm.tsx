@@ -1,10 +1,10 @@
-import { DarkButton } from '@/components/shop/styled/DarkButton'
 import { SIZE_LABELS } from '@/lib/constants'
 import useCartStore from '@/lib/store/cart.store'
 import useUiStore from '@/lib/store/ui.store'
-import { UserProductEntity } from '@/types/entities/product.entity'
+import { UserProductShowEntity } from '@/types/entities/product.entity'
 import {
     ActionIcon,
+    Button,
     ColorSwatch,
     Group,
     Stack,
@@ -24,7 +24,7 @@ type AddProductToCartDto = {
 export const AddProductToCartForm = ({
     product,
 }: {
-    product: UserProductEntity
+    product: UserProductShowEntity
 }) => {
     const { classes, cx } = useStyles()
 
@@ -129,9 +129,18 @@ export const AddProductToCartForm = ({
                 </Stack>
 
                 {/* add to cart */}
-                <DarkButton type="submit" w="50%">
-                    Add to cart
-                </DarkButton>
+                <Button
+                    size="lg"
+                    color="dark"
+                    radius="xl"
+                    fz="md"
+                    sx={{
+                        alignSelf: 'start',
+                    }}
+                    w={300}
+                >
+                    Add to Cart
+                </Button>
             </Stack>
         </form>
     )

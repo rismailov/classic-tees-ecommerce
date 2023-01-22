@@ -1,4 +1,4 @@
-import { ProductEntity } from '@/types/entities/product.entity'
+import { UserProductIndexEntity } from '@/types/entities/product.entity'
 import { Stack, Title, Text, UnstyledButton, Box, Group } from '@mantine/core'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -7,7 +7,11 @@ import { Reviews } from '../../Reviews'
 import { QuickAdd } from './QuickAdd'
 import { useStyles } from './ProductCard.styles'
 
-export const ProductCard = ({ product }: { product: ProductEntity }) => {
+export const ProductCard = ({
+    product,
+}: {
+    product: UserProductIndexEntity
+}) => {
     // This is needed to delay animation. Can be safely removed.
     // @note: to understand the purpose of this delay, add product to Cart from "Quick add" button,
     // and then quickly remove the mouse from the product card
@@ -43,7 +47,10 @@ export const ProductCard = ({ product }: { product: ProductEntity }) => {
 
             {/* Description */}
             <Stack spacing={5} p="md">
-                <Reviews />
+                <Reviews
+                    reviewsCount={product.reviewsCount}
+                    starsCount={product.averageStars}
+                />
 
                 <Title order={5}>{product.name}</Title>
 

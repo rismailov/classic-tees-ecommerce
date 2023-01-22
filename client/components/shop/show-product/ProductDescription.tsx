@@ -1,14 +1,21 @@
-import { ProductEntity } from '@/types/entities/product.entity'
+import { UserProductShowEntity } from '@/types/entities/product.entity'
 import { Group, Stack, Title, Text } from '@mantine/core'
 import { Reviews } from '../Reviews'
 import { AddProductToCartForm } from './AddProductToCartForm'
 
-export const ProductDescription = ({ product }: { product: ProductEntity }) => {
+export const ProductDescription = ({
+    product,
+}: {
+    product: UserProductShowEntity
+}) => {
     return (
         <Stack w="100%" spacing="xl" sx={{ flex: 1 }}>
             <Stack spacing="xs">
                 {/* rating */}
-                <Reviews />
+                <Reviews
+                    reviewsCount={product.reviews.meta.total}
+                    starsCount={Math.round(product.averageStars)}
+                />
 
                 {/* name */}
                 <Title order={1}>{product.name}</Title>

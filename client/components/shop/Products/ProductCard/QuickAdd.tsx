@@ -1,6 +1,5 @@
 import useCartStore from '@/lib/store/cart.store'
 import useUiStore from '@/lib/store/ui.store'
-import { ProductEntity } from '@/types/entities/product.entity'
 import { sleep } from '@/utils'
 import { Box, Text, Group, Stack, ActionIcon } from '@mantine/core'
 import { motion } from 'framer-motion'
@@ -9,15 +8,16 @@ import { FiPlus } from '@react-icons/all-files/fi/FiPlus'
 import { FiX } from '@react-icons/all-files/fi/FiX'
 import { SelectSizeActionIcon } from './quick-add/SelectSizeActionIcon'
 import { useStyles } from './QuickAdd.styles'
+import { UserProductIndexEntity } from '@/types/entities/product.entity'
 
-type TSize = ProductEntity['sizes'][number]
+type TSize = UserProductIndexEntity['sizes'][number]
 
 export const QuickAdd = ({
     product,
     isLoading,
     setIsLoading,
 }: {
-    product: ProductEntity
+    product: UserProductIndexEntity
     isLoading: boolean
     setIsLoading: (v: boolean) => void
 }) => {
@@ -50,11 +50,11 @@ export const QuickAdd = ({
 
         // important part start
         addItem({
-            id: `${product.id}-${size.id}`,
+            id: `${product.id}-${size.value}`,
             imageUrl: product.images[0].url,
             name: product.name,
-            size,
-            price: product.price,
+            size: { id: size.value, name: size.label },
+            price: product.price.discounted ?? product.price.initial,
             amount: 1,
             colour: {
                 id: product.colour.value,
@@ -108,9 +108,11 @@ export const QuickAdd = ({
                             <Group spacing={5}>
                                 {product.sizes.map((size) => (
                                     <SelectSizeActionIcon
-                                        key={size.id}
+                                        key={size.value}
                                         size={size}
-                                        isSelected={size.id == selectedSize?.id}
+                                        isSelected={
+                                            size.value == selectedSize?.value
+                                        }
                                         isLoading={isLoading}
                                         classes={classes.size}
                                         onAddItem={() => onAddItem(size)}

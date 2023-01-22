@@ -45,4 +45,9 @@ return [
         'single'   => 'Product',
         'multiple' => 'Products',
     ],
+
+    'reviews' => [
+        'single'   => 'Review',
+        'multiple' => 'Reviews',
+    ],
 ];

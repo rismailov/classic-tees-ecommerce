@@ -6,7 +6,6 @@ import {
     Group,
     UnstyledButton,
 } from '@mantine/core'
-import { ProductEntity } from '@/types/entities/product.entity'
 import { useEffect, useRef, useState } from 'react'
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import { useStyles } from './ProductImages.styles'
@@ -14,8 +13,13 @@ import { Navigation, Thumbs } from 'swiper'
 import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react'
 import { Swiper as SwiperCore } from 'swiper/types'
 import 'swiper/css'
+import { UserProductShowEntity } from '@/types/entities/product.entity'
 
-export const ProductImages = ({ product }: { product: ProductEntity }) => {
+export const ProductImages = ({
+    product,
+}: {
+    product: UserProductShowEntity
+}) => {
     const { classes } = useStyles()
 
     const mainSwiperRef = useRef<SwiperCore>()

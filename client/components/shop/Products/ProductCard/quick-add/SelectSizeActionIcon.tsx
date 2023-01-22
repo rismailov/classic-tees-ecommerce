@@ -1,4 +1,4 @@
-import { ProductEntity } from '@/types/entities/product.entity'
+import { UserProductIndexEntity } from '@/types/entities/product.entity'
 import { ActionIcon, ActionIconProps } from '@mantine/core'
 import { FiCheck } from '@react-icons/all-files/fi/FiCheck'
 
@@ -11,7 +11,7 @@ export const SelectSizeActionIcon = ({
 }: {
     isLoading: boolean
     isSelected: boolean
-    size: ProductEntity['sizes'][number]
+    size: UserProductIndexEntity['sizes'][number]
     onAddItem: () => void
     classes: ActionIconProps['className']
 }) => {
@@ -43,7 +43,7 @@ export const SelectSizeActionIcon = ({
                     }),
             })}
         >
-            {isSelected ? <FiCheck size={18} /> : size.name.toUpperCase()}
+            {isSelected ? <FiCheck size={18} /> : size.label.toUpperCase()}
         </ActionIcon>
     )
 }

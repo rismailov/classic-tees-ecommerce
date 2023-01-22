@@ -92,4 +92,9 @@ class Product extends Model
         return $this->morphMany(Image::class, 'imageable')
             ->orderBy('order', 'asc');
     }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 }

@@ -1,4 +1,4 @@
-import { ProductEntity } from '@/types/entities/product.entity'
+import { AdminProductEntity } from '@/types/entities/product.entity'
 import { Box, Group, Image } from '@mantine/core'
 import { FiTrash2 } from 'react-icons/fi'
 import { ImageActionButton } from '../../images/ImageActionButton'
@@ -8,7 +8,7 @@ export const CurrentImage = ({
     deleteImage,
     canDelete,
 }: {
-    currentImage: ProductEntity['images'][number]
+    currentImage: AdminProductEntity['images'][number]
     deleteImage: () => void
     canDelete: boolean
 }) => {

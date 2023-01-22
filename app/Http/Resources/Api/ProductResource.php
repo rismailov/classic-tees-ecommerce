@@ -28,8 +28,8 @@ class ProductResource extends JsonResource
                 'value' => $this->getRawOriginal('category'),
                 'label' => $this->category,
             ],
-            'colour'  => $this->colour,
-            'colours' => $this->when(
+            'colour'       => $this->colour,
+            'colours'      => $this->when(
                 ! $request->routeIs('products.show'),
                 $this->colours->map(function ($colour) {
                     return [
@@ -43,6 +43,17 @@ class ProductResource extends JsonResource
                 $request->routeIs('products.show'),
                 $this->availableColours
             ),
+            'reviews' => $this->when(
+                $request->routeIs('products.show'),
+                ReviewResource::collection($this->reviews)
+                    ->response()
+                    ->getData(true)
+            ),
+            'reviewsCount' => $this->when(
+                $request->routeIs('products.index'),
+                $this->reviews_count
+            ),
+            'averageStars' => $this->reviews->avg('stars'),
             'sizes' => $this->sizes
                 ->map(function ($size) {
                     return [

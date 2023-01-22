@@ -24,7 +24,10 @@ class ProductController extends Controller
     {
         $v = fn (string $key) => $request->validated($key);
 
-        $products = Product::with(['sizes', 'images', 'colours'])
+        $products = Product::with([
+            'sizes', 'images', 'colours', 'reviews'
+        ])
+            ->withCount('reviews')
             ->when($v('categories'), function ($q) use ($v) {
                 $q->whereIn('category', $v('categories'));
             })
@@ -70,6 +73,7 @@ class ProductController extends Controller
     {
         // available colours on products from the same category.
         // this is needed for user to select a different colour
+        // TODO: make this a separate request and load it in "getStaticProps"
         $product->availableColours = Product::with('colours')
             ->select('id', 'nanoid')
             ->where('category', $product->getRawOriginal('category'))
@@ -81,6 +85,10 @@ class ProductController extends Controller
                     'colour' => $product->colour,
                 ];
             });
+
+        $product->reviews = $product->reviews()
+            ->latest()
+            ->paginate(5);
 
         return $this->respondWithSuccess(
             ProductResource::make($product)

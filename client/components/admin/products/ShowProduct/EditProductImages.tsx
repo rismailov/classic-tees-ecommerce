@@ -4,7 +4,7 @@ import {
     reorderImagesAction,
 } from '@/lib/api/admin/product-images'
 import { REACT_QUERY_PRODUCTS_KEY } from '@/lib/constants'
-import { ProductEntity } from '@/types/entities/product.entity'
+import { AdminProductEntity } from '@/types/entities/product.entity'
 import { Stack, Text, Alert, Group, Button } from '@mantine/core'
 import { Reorder, useMotionValue } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
@@ -13,7 +13,7 @@ import { useMutation, useQueryClient } from 'react-query'
 import { SectionLayout } from '../../SectionLayout'
 import { CurrentImage } from './edit-product-images/CurrentImage'
 
-export const EditProductImages = (product: ProductEntity) => {
+export const EditProductImages = (product: AdminProductEntity) => {
     const queryClient = useQueryClient()
 
     // Framer motion
