@@ -7,7 +7,7 @@ import { REACT_QUERY_PRODUCTS_KEY } from '@/lib/constants'
 import { Container, Divider, Group, Stack } from '@mantine/core'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 
 export default function ShowProduct() {
     const router = useRouter()

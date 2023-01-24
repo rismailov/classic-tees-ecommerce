@@ -13,20 +13,20 @@ type ProductsResponse = {
     // we only care about total (amount of products)
     meta: { total: number }
 }
-export const getProducts = async (params?: GetProductsDto) =>
-    await axios.get<any, ProductsResponse>('products', { params })
+export const getProducts = (params?: GetProductsDto) =>
+    axios.get<any, ProductsResponse>('products', { params })
 
-export const getFilterOptions = async () =>
-    await axios.get<any, FilterOptions>('options/product-filters')
+export const getFilterOptions = () =>
+    axios.get<any, FilterOptions>('options/product-filters')
 
-export const showProduct = async ({
+export const showProduct = ({
     productNanoid,
     reviewsPage,
 }: {
     productNanoid: string
     reviewsPage: number
 }) =>
-    await axios.get<any, UserProductShowEntity>(`products/${productNanoid}`, {
+    axios.get<any, UserProductShowEntity>(`products/${productNanoid}`, {
         params: {
             page: reviewsPage,
         },

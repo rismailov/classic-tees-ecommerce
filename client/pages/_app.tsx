@@ -5,7 +5,6 @@ import { NotificationsProvider } from '@mantine/notifications'
 import { NextPage } from 'next'
 import type { AppProps } from 'next/app'
 import { ReactElement, ReactNode } from 'react'
-import { IconContext } from 'react-icons'
 import theme from '../lib/mantine/theme'
 import '../styles/globals.css'
 
@@ -19,18 +18,15 @@ export default function App(
     },
 ) {
     const { Component, pageProps } = props
-
     const getLayout = Component.getLayout ?? ((page) => page)
     const pageWithLayout = getLayout(<Component {...pageProps} />)
 
     return (
         <MantineProvider withGlobalStyles withNormalizeCSS theme={theme}>
             <NotificationsProvider position="bottom-right">
-                <IconContext.Provider value={{ size: '20px' }}>
-                    <QCProvider>
-                        <AppLayout children={pageWithLayout} />
-                    </QCProvider>
-                </IconContext.Provider>
+                <QCProvider>
+                    <AppLayout children={pageWithLayout} />
+                </QCProvider>
             </NotificationsProvider>
         </MantineProvider>
     )

@@ -51,7 +51,6 @@ export const LoadingOverlay: ThemeComponent<
 > = {
     defaultProps: {
         zIndex: 999,
-        loaderProps: { variant: 'bars' },
     },
 }
 

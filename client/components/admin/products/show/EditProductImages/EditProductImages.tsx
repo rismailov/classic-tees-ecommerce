@@ -9,7 +9,7 @@ import { Stack, Text, Alert, Group, Button } from '@mantine/core'
 import { Reorder, useMotionValue } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
 import { BsLightbulb } from 'react-icons/bs'
-import { useMutation, useQueryClient } from 'react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { SectionLayout } from '../../../SectionLayout'
 import { CurrentImage } from './CurrentImage'
 
@@ -67,7 +67,7 @@ export const EditProductImages = (product: AdminProductEntity) => {
             <Alert mb="md">
                 <Group
                     sx={(theme) => ({
-                        color: theme.fn.themeColor('accent'),
+                        color: theme.fn.primaryColor(),
                     })}
                 >
                     <BsLightbulb size={17} />

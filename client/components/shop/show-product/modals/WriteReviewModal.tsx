@@ -14,7 +14,7 @@ import {
 import { useForm } from '@mantine/form'
 import { useState } from 'react'
 import { FiStar } from 'react-icons/fi'
-import { useMutation, useQueryClient } from 'react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 const ReviewStar = ({
     setStars,

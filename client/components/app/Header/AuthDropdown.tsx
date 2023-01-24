@@ -11,9 +11,9 @@ import {
     Text,
     Tooltip,
 } from '@mantine/core'
+import { FiEdit } from '@react-icons/all-files/fi/FiEdit'
 import { FiLogOut } from '@react-icons/all-files/fi/FiLogOut'
 import { FiShoppingCart } from '@react-icons/all-files/fi/FiShoppingCart'
-import { FiEdit } from '@react-icons/all-files/fi/FiEdit'
 import { FiUser } from '@react-icons/all-files/fi/FiUser'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -135,9 +135,9 @@ export const AuthDropdown = () => {
                 <Menu.Item icon={<FiShoppingCart size={17} />}>Cart</Menu.Item>
                 {user && (
                     <Menu.Item
-                        color="red"
-                        icon={<FiLogOut size={17} />}
                         onClick={logout}
+                        icon={<FiLogOut size={17} />}
+                        color="red"
                     >
                         Logout
                     </Menu.Item>

@@ -4,14 +4,14 @@ import { getProducts } from '@/lib/api/admin/products'
 import { REACT_QUERY_PRODUCTS_KEY } from '@/lib/constants'
 import { Button, Card, Container, Loader, Text } from '@mantine/core'
 import Link from 'next/link'
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 
 export default function ProductsIndex() {
-    const { data: products, isLoading } = useQuery(
-        REACT_QUERY_PRODUCTS_KEY,
-        getProducts,
-        { refetchOnWindowFocus: false },
-    )
+    const { data: products, isLoading } = useQuery({
+        queryKey: [REACT_QUERY_PRODUCTS_KEY],
+        queryFn: getProducts,
+        refetchOnWindowFocus: false,
+    })
 
     return (
         <Container>

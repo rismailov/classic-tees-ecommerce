@@ -26,3 +26,7 @@ export const SIZE_LABELS: Record<string, string> = {
 
 // Amount of products loaded on "Load more" button click
 export const LOAD_MORE_PRODUCTS_AMOUNT = 6
+
+// Redirect routes for middlewares
+export const REDIRECT_ROUTE_MIDDLEWARE_GUEST = '/shop'
+export const REDIRECT_ROUTE_MIDDLEWARE_AUTH = '/auth/login'

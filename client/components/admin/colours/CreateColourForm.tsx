@@ -9,7 +9,7 @@ import {
     ColorInput,
 } from '@mantine/core'
 import { useForm } from '@mantine/form'
-import { useMutation, useQueryClient } from 'react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { randomId } from '@mantine/hooks'
 import { FiTrash } from '@react-icons/all-files/fi/FiTrash'
 import { FiPlus } from '@react-icons/all-files/fi/FiPlus'
@@ -32,7 +32,9 @@ export const CreateColourForm = () => {
         mutateAsync(values).then(() => {
             form.reset()
 
-            queryClient.invalidateQueries(REACT_QUERY_COLOURS_KEY)
+            queryClient.invalidateQueries({
+                queryKey: [REACT_QUERY_COLOURS_KEY],
+            })
         })
     }
 

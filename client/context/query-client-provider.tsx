@@ -1,18 +1,22 @@
 import { useToast } from '@/hooks/use-toast'
+import {
+    MutationCache,
+    QueryClient,
+    QueryClientProvider,
+} from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 import { ReactNode, useState } from 'react'
-import { MutationCache, QueryClient, QueryClientProvider } from 'react-query'
 
 export const QCProvider = ({ children }: { children: ReactNode }) => {
     const { showError, showSuccess } = useToast()
     const [queryClient] = useState<QueryClient>(
         () =>
             new QueryClient({
-                defaultOptions: {
-                    queries: {
-                        retry: false,
-                    },
-                },
+                // defaultOptions: {
+                //     queries: {
+                //         retry: false,
+                //     },
+                // },
 
                 mutationCache: new MutationCache({
                     onError: (error, _variables, _context, { meta }) => {

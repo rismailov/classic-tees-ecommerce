@@ -1,6 +1,6 @@
 import { showNotification } from '@mantine/notifications'
 import { AxiosError } from 'axios'
-import { MutationMeta } from 'react-query'
+import { MutationMeta } from '@tanstack/react-query'
 import { isAnObject } from './is-object'
 
 type LaravelApiErrorData = {

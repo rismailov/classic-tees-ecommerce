@@ -6,7 +6,7 @@ import { Button, Card, Stack, Title } from '@mantine/core'
 import { FileWithPath } from '@mantine/dropzone'
 import { useForm } from '@mantine/form'
 import React from 'react'
-import { useMutation, useQueryClient } from 'react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { SectionLayout } from '../../../SectionLayout'
 import { ImageDropzone } from './ImageDropzone'
 

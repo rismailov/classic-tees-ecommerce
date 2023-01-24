@@ -3,14 +3,14 @@ import { LoginDto } from '@/types/api/dto/auth/login.dto'
 import { RegisterDto } from '@/types/api/dto/auth/register.dto'
 import { UserEntity } from '@/types/entities/user.entity'
 
-export const csrf = async () => await axios.get('/sanctum/csrf-cookie')
+export const csrf = (): Promise<void> => axios.get('/sanctum/csrf-cookie')
 
-export const getUser = async (): Promise<UserEntity> => await axios.get('user')
+export const getUser = (): Promise<UserEntity> => axios.get('user')
 
-export const login = async (formValues: LoginDto): Promise<void> =>
-    await axios.post('/login', formValues)
+export const login = (formValues: LoginDto): Promise<void> =>
+    axios.post('/login', formValues)
 
-export const register = async (formValues: RegisterDto): Promise<void> =>
-    await axios.post('/register', formValues)
+export const register = (formValues: RegisterDto): Promise<void> =>
+    axios.post('/register', formValues)
 
-export const logoutUser = async () => await axios.post('/logout')
+export const logoutUser = (): Promise<void> => axios.post('/logout')

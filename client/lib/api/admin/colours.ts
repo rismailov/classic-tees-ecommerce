@@ -4,14 +4,13 @@ import { TJsonResponse } from '@/types/api/json-response.type'
 import { TPaginatedData } from '@/types/api/paginated-data.type'
 import { ColourEntity } from '@/types/entities/colour.entity'
 
-export const getColours = async (params: {
+export const getColours = (params: {
     page: number
 }): Promise<TPaginatedData<ColourEntity[]>> =>
-    await axios.get('/admin/colours', { params })
+    axios.get('/admin/colours', { params })
 
-export const storeColour = async (
-    data: StoreColourDto,
-): Promise<TJsonResponse> => await axios.post('/admin/colours', data)
+export const storeColour = (data: StoreColourDto): Promise<TJsonResponse> =>
+    axios.post('/admin/colours', data)
 
-export const removeColour = async (id: number): Promise<TJsonResponse> =>
-    await axios.delete(`/admin/colours/${id}`)
+export const removeColour = (id: number): Promise<TJsonResponse> =>
+    axios.delete(`/admin/colours/${id}`)

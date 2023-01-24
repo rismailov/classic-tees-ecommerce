@@ -1,17 +1,29 @@
 import AuthLayout from '@/components/layouts/AuthLayout'
+import { useAuth } from '@/hooks/use-auth'
 import { register } from '@/lib/api/auth'
 import { REACT_QUERY_AUTH_KEY } from '@/lib/constants'
 import { RegisterDto } from '@/types/api/dto/auth/register.dto'
-import { Button, PasswordInput, Stack, TextInput } from '@mantine/core'
+import { sleep } from '@/utils'
+import {
+    Button,
+    LoadingOverlay,
+    PasswordInput,
+    Stack,
+    TextInput,
+} from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { useFocusTrap } from '@mantine/hooks'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import Head from 'next/head'
-import { ReactElement } from 'react'
-import { useMutation, useQueryClient } from 'react-query'
+import { ReactElement, useState } from 'react'
 
 export default function Register() {
     const queryClient = useQueryClient()
+    const { user, isLoading } = useAuth({ middleware: 'guest' })
+
     const ref = useFocusTrap()
+
+    const [isFormSubmitting, setIsFormSubmitting] = useState(false)
     const form = useForm<RegisterDto>({
         initialValues: {
             fname: '',
@@ -34,22 +46,36 @@ export default function Register() {
         },
     })
 
-    const { mutateAsync, isLoading } = useMutation(register, { meta: { form } })
+    const { mutateAsync } = useMutation(register, {
+        meta: { form },
+    })
 
     const onSubmit = async (values: RegisterDto) => {
-        await mutateAsync(values)
+        setIsFormSubmitting(true)
 
-        queryClient.invalidateQueries(REACT_QUERY_AUTH_KEY)
+        try {
+            await sleep()
+            await mutateAsync(values)
+
+            queryClient.invalidateQueries({
+                queryKey: [REACT_QUERY_AUTH_KEY],
+            })
+        } catch (_) {}
+
+        setIsFormSubmitting(false)
     }
 
     return (
         <form onSubmit={form.onSubmit(onSubmit)}>
+            {(user || isLoading || isFormSubmitting) && (
+                <LoadingOverlay visible={true} />
+            )}
+
             <Head>
                 <title>Register</title>
             </Head>
 
             <Stack>
-                {/* <Group grow noWrap align="start"> */}
                 <TextInput
                     required
                     ref={ref}
@@ -64,7 +90,6 @@ export default function Register() {
                     size="md"
                     {...form.getInputProps('lname')}
                 />
-                {/* </Group> */}
 
                 <TextInput
                     required
@@ -91,7 +116,6 @@ export default function Register() {
                 <Button
                     type="submit"
                     color="dark"
-                    loading={isLoading}
                     h={50}
                     size="md"
                     disabled={Object.values(form.values).some((v) => v === '')}

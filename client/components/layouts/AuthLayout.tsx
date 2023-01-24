@@ -1,5 +1,4 @@
-import { useAuth } from '@/hooks/use-auth'
-import { Box, Divider, LoadingOverlay, Stack, Text, Title } from '@mantine/core'
+import { Box, Divider, Stack, Text, Title } from '@mantine/core'
 import { AnimatePresence, motion } from 'framer-motion'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -7,14 +6,10 @@ import { ReactNode } from 'react'
 import { useStyles } from './AuthLayout.styles'
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
-    const { user, isLoading } = useAuth({ middleware: 'guest' })
     const { classes } = useStyles()
-    const router = useRouter()
-    const { pathname } = router
+    const { pathname } = useRouter()
 
-    return user || isLoading ? (
-        <LoadingOverlay visible={true} />
-    ) : (
+    return (
         <Stack align="center" spacing={5} pt={45}>
             <AnimatePresence mode="wait" initial={false}>
                 <motion.span
@@ -42,43 +37,45 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
                 </motion.span>
             </AnimatePresence>
 
-            <Divider my="md" sx={{ width: '100%', maxWidth: '50vw' }} />
+            <Divider mt="md" sx={{ width: '100%', maxWidth: '50vw' }} />
 
-            <Stack align="center" spacing={5}>
-                <Title>
-                    {pathname.includes('login') ? 'Login' : 'Register'}
-                </Title>
+            <Stack p="md" pos="relative" sx={{ borderRadius: 5 }}>
+                <Stack align="center" spacing={5}>
+                    <Title>
+                        {pathname.includes('login') ? 'Login' : 'Register'}
+                    </Title>
 
-                <Text size="lg">
-                    or{' '}
-                    <Text
-                        inherit
-                        component={Link}
-                        href={
-                            pathname.includes('login')
-                                ? '/auth/register'
-                                : '/auth/login'
-                        }
-                        variant="gradient"
-                    >
-                        {pathname.includes('login')
-                            ? 'create a free account'
-                            : 'login with your account'}
+                    <Text size="lg">
+                        or{' '}
+                        <Text
+                            inherit
+                            component={Link}
+                            href={
+                                pathname.includes('login')
+                                    ? '/auth/register'
+                                    : '/auth/login'
+                            }
+                            variant="gradient"
+                        >
+                            {pathname.includes('login')
+                                ? 'create a free account'
+                                : 'login with your account'}
+                        </Text>
                     </Text>
-                </Text>
-            </Stack>
+                </Stack>
 
-            <Box
-                mt="md"
-                sx={(theme) => ({
-                    width: '100%',
-                    [`@media (min-width: ${theme.breakpoints.xs}px)`]: {
-                        width: 400,
-                    },
-                })}
-            >
-                {children}
-            </Box>
+                <Box
+                    mt="md"
+                    sx={(theme) => ({
+                        width: '100%',
+                        [`@media (min-width: ${theme.breakpoints.xs}px)`]: {
+                            width: 400,
+                        },
+                    })}
+                >
+                    {children}
+                </Box>
+            </Stack>
         </Stack>
     )
 }

@@ -4,8 +4,8 @@ import { UpdateProductDto } from '@/types/api/dto/products/update-product.dto'
 import { TJsonResponse } from '@/types/api/json-response.type'
 import { AdminProductEntity } from '@/types/entities/product.entity'
 
-export const getProducts = async () =>
-    await axios.get<any, AdminProductEntity[]>('/admin/products')
+export const getProducts = () =>
+    axios.get<any, AdminProductEntity[]>('/admin/products')
 
 // Get available product properties
 type TOptions = {
@@ -13,6 +13,7 @@ type TOptions = {
     categories: string[]
     colours: { value: string; label: string; hex: string }[]
 }
+
 export const getPropertyOptions = async () => {
     const { sizes, colours, categories } = await axios.get<any, TOptions>(
         '/admin/products/property-options',
@@ -31,8 +32,8 @@ export const getPropertyOptions = async () => {
     }
 }
 
-export const storeProduct = async (dto: StoreProductDto) =>
-    await axios.post<any, TJsonResponse & { product: AdminProductEntity }>(
+export const storeProduct = (dto: StoreProductDto) =>
+    axios.post<any, TJsonResponse & { product: AdminProductEntity }>(
         '/admin/products',
         dto,
         {
@@ -42,18 +43,13 @@ export const storeProduct = async (dto: StoreProductDto) =>
         },
     )
 
-export const updateProductAction = async ({
+export const updateProductAction = ({
     productID,
     dto,
 }: {
     productID: number
     dto: UpdateProductDto
-}) => {
-    return await axios.patch<any, TJsonResponse>(
-        `/admin/products/${productID}`,
-        dto,
-    )
-}
+}) => axios.patch<any, TJsonResponse>(`/admin/products/${productID}`, dto)
 
-export const showProduct = async (id: string) =>
-    await axios.get<any, AdminProductEntity>(`/admin/products/${id}`)
+export const showProduct = (id: string) =>
+    axios.get<any, AdminProductEntity>(`/admin/products/${id}`)

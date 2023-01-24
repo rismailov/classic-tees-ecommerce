@@ -8,7 +8,7 @@ import { REACT_QUERY_COLOURS_KEY } from '@/lib/constants'
 import { Center, Container, Group, Pagination, Text } from '@mantine/core'
 import axios from 'axios'
 import { ReactElement, useState } from 'react'
-import { useMutation, useQuery, useQueryClient } from 'react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 export default function ColoursIndex() {
     const queryClient = useQueryClient()
@@ -24,7 +24,9 @@ export default function ColoursIndex() {
 
     const { mutateAsync: deleteColour } = useMutation(removeColour, {
         onSuccess: () => {
-            queryClient.invalidateQueries(REACT_QUERY_COLOURS_KEY)
+            queryClient.invalidateQueries({
+                queryKey: [REACT_QUERY_COLOURS_KEY],
+            })
         },
         onError: (error) => {
             if (axios.isAxiosError(error) && error.response?.status === 400) {

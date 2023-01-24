@@ -8,7 +8,7 @@ import { FileWithPath } from '@mantine/dropzone'
 import { useForm } from '@mantine/form'
 import { useRouter } from 'next/router'
 import { ReactElement } from 'react'
-import { useMutation, useQueryClient } from 'react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 export default function CreateProduct() {
     const router = useRouter()

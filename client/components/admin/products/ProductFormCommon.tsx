@@ -1,20 +1,20 @@
 import { getPropertyOptions } from '@/lib/api/admin/products'
 import {
     Checkbox,
+    ColorSwatch,
+    Group,
+    Input,
     NumberInput,
     Select,
-    TextInput,
-    Text,
-    Group,
-    ColorSwatch,
     Stack,
-    Input,
+    Text,
+    TextInput,
 } from '@mantine/core'
 import { UseFormReturnType } from '@mantine/form'
-import { forwardRef, useEffect, useRef } from 'react'
 import { FiDollarSign } from '@react-icons/all-files/fi/FiDollarSign'
 import { FiPercent } from '@react-icons/all-files/fi/FiPercent'
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
+import { forwardRef, useEffect, useRef } from 'react'
 
 interface ItemProps extends React.ComponentPropsWithoutRef<'div'> {
     value: string
@@ -50,10 +50,10 @@ export const ProductFormCommon = ({
         }
     }, [isDiscounted, discountPercentInputRef])
 
-    const { data: options, isLoading: isOptionsLoading } = useQuery(
-        'property-options',
-        getPropertyOptions,
-    )
+    const { data: options, isLoading: isOptionsLoading } = useQuery({
+        queryKey: ['property-options'],
+        queryFn: getPropertyOptions,
+    })
 
     if (isOptionsLoading) {
         return <></>
