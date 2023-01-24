@@ -18,7 +18,11 @@ export default function ProductsIndex() {
             <PageLayout
                 breadcrumbs={['Products']}
                 rightSide={
-                    <Button component={Link} href="/admin/products/create">
+                    <Button
+                        component={Link}
+                        href="/admin/products/create"
+                        color="dark"
+                    >
                         Create
                     </Button>
                 }

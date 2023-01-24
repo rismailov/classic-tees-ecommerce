@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\OptionController;
 use App\Http\Controllers\Api\User\ProductController;
 use App\Http\Controllers\Api\User\ReviewController;
+use App\Http\Resources\Api\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
-    return $request->user();
+    return new UserResource($request->user());
 });
 
 /* User Routes */
@@ -35,3 +36,4 @@ Route::post('/products/{product}/reviews', [ReviewController::class, 'store']);
 Route::get('/options/product-filters', [OptionController::class, 'productFilters']);
 
 require __DIR__.'/api/admin.php';
+require __DIR__.'/auth.php';

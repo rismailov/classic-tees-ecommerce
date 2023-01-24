@@ -1,21 +1,34 @@
+import { getUser, logoutUser } from '@/lib/api/auth'
+import { REACT_QUERY_AUTH_KEY } from '@/lib/constants'
+import { UserEntity } from '@/types/entities/user.entity'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useQuery, useQueryClient } from 'react-query'
-import { getUser, logoutUser } from '@/lib/api/auth'
-import { REACT_QUERY_AUTH_KEY } from '@/lib/constants'
-import { UserEntity } from '@/types/entities/fuser.entity'
 
 type UseAuthReturnType = {
     user: UserEntity | undefined
     logout: () => Promise<void>
+    isLoading: boolean
 }
 
 export const useAuth = ({
     middleware,
-}: { middleware?: 'guest' | 'auth' | 'none' } = {}): UseAuthReturnType => {
+}: {
+    // if middleware not passed, then there's no redirect needed
+    // an example can be rendering user data in a static component like header
+    middleware?: 'guest' | 'auth'
+} = {}): UseAuthReturnType => {
     const router = useRouter()
     const queryClient = useQueryClient()
-    const { data: user, error } = useQuery([REACT_QUERY_AUTH_KEY], getUser)
+
+    const {
+        data: user,
+        error,
+        status,
+    } = useQuery({
+        queryFn: getUser,
+        queryKey: [REACT_QUERY_AUTH_KEY],
+    })
 
     async function logout() {
         await logoutUser()
@@ -25,7 +38,7 @@ export const useAuth = ({
 
     useEffect(() => {
         if (middleware === 'guest' && user) {
-            router.push('/dashboard')
+            router.push('/shop')
         }
 
         if (middleware === 'auth' && error) {
@@ -33,5 +46,9 @@ export const useAuth = ({
         }
     }, [user, error])
 
-    return { user, logout }
+    return {
+        user,
+        logout,
+        isLoading: status === 'loading',
+    }
 }

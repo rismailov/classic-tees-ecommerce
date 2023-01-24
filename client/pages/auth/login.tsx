@@ -1,4 +1,5 @@
 import AuthLayout from '@/components/layouts/AuthLayout'
+import { LoginDto } from '@/types/api/dto/auth/login.dto'
 import {
     Button,
     Checkbox,
@@ -7,9 +8,8 @@ import {
     TextInput,
 } from '@mantine/core'
 import { useForm } from '@mantine/form'
-import Head from 'next/head'
 import { useFocusTrap } from '@mantine/hooks'
-import { LoginDto } from '@/lib/api/auth'
+import Head from 'next/head'
 import { ReactElement } from 'react'
 
 export default function Login() {
@@ -57,6 +57,7 @@ export default function Login() {
                 <Button
                     type="submit"
                     size="md"
+                    color="dark"
                     disabled={Object.values(form.values).some((v) => v === '')}
                     fullWidth
                 >

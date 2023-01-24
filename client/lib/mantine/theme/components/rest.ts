@@ -34,13 +34,17 @@ export const Button: ThemeComponent<
     styles: (theme, params) => ({
         root: {
             fontWeight: 450,
-            ...(params.size === 'md'
-                ? {
-                      paddingLeft: 25,
-                      paddingRight: 25,
-                      fontSize: theme.fontSizes.md,
-                  }
-                : undefined),
+            ...(params.size === 'md' && {
+                paddingLeft: 25,
+                paddingRight: 25,
+                fontSize: theme.fontSizes.md,
+            }),
+            ...(params.color === 'dark' && {
+                backgroundColor: theme.colors.dark[4],
+                ':hover': {
+                    backgroundColor: theme.colors.dark[7],
+                },
+            }),
         },
     }),
 }

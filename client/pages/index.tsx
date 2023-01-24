@@ -1,6 +1,4 @@
-import { AppLayout } from '@/components/layouts/AppLayout'
 import Head from 'next/head'
-import { ReactElement } from 'react'
 
 export default function Home() {
     return (
@@ -19,5 +17,3 @@ export default function Home() {
         </>
     )
 }
-
-Home.getLayout = (page: ReactElement) => <AppLayout children={page} />

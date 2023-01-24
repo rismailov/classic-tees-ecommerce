@@ -70,6 +70,7 @@ export default function CreateProduct() {
 
                     <Button
                         type="submit"
+                        color="dark"
                         fullWidth
                         h={45}
                         loading={isFormSubmitting}

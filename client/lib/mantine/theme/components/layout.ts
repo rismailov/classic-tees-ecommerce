@@ -50,7 +50,8 @@ export const LoadingOverlay: ThemeComponent<
     Styles<string>
 > = {
     defaultProps: {
-        zIndex: 10,
+        zIndex: 999,
+        loaderProps: { variant: 'bars' },
     },
 }
 

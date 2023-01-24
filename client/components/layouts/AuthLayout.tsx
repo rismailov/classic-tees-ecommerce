@@ -1,36 +1,46 @@
-import { Box, Divider, Stack, Text, Title } from '@mantine/core'
+import { useAuth } from '@/hooks/use-auth'
+import { Box, Divider, LoadingOverlay, Stack, Text, Title } from '@mantine/core'
+import { AnimatePresence, motion } from 'framer-motion'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { ReactNode, useEffect, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { ReactNode } from 'react'
+import { useStyles } from './AuthLayout.styles'
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
-    const { pathname } = useRouter()
-    const [isLoginPage, toggleIsLoginPage] = useState(
-        pathname.includes('login'),
-    )
+    const { user, isLoading } = useAuth({ middleware: 'guest' })
+    const { classes } = useStyles()
+    const router = useRouter()
+    const { pathname } = router
 
-    useEffect(() => {
-        toggleIsLoginPage(pathname.includes('login'))
-    }, [pathname])
-
-    return (
+    return user || isLoading ? (
+        <LoadingOverlay visible={true} />
+    ) : (
         <Stack align="center" spacing={5} pt={45}>
-            <Title order={3} sx={{ fontWeight: 400, opacity: 0.7 }}>
-                <AnimatePresence exitBeforeEnter>
-                    <motion.div
-                        key={pathname}
-                        initial={{ y: 10, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        exit={{ y: -10, opacity: 0 }}
-                        transition={{ duration: 0.25 }}
-                    >
-                        {isLoginPage
-                            ? 'Login to enjoy full services.'
-                            : 'Join us to get our newsletters, discounts and more!'}
-                    </motion.div>
-                </AnimatePresence>
-            </Title>
+            <AnimatePresence mode="wait" initial={false}>
+                <motion.span
+                    key={pathname}
+                    className={classes.descriptionText}
+                    initial={{ y: 3, opacity: 0 }}
+                    animate={{
+                        y: 0,
+                        opacity: 1,
+                        transition: { duration: 0.5 },
+                    }}
+                    exit={{
+                        y: -3,
+                        opacity: 0,
+                        transition: { duration: 0.1 },
+                    }}
+                    transition={{
+                        type: 'tween',
+                        ease: 'easeIn',
+                    }}
+                >
+                    {pathname.includes('login')
+                        ? 'Login to enjoy full services.'
+                        : 'Join us to get our newsletters, discounts and more!'}
+                </motion.span>
+            </AnimatePresence>
 
             <Divider my="md" sx={{ width: '100%', maxWidth: '50vw' }} />
 

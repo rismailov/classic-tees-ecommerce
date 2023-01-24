@@ -67,7 +67,7 @@ export const EditProductImages = (product: AdminProductEntity) => {
             <Alert mb="md">
                 <Group
                     sx={(theme) => ({
-                        color: theme.fn.primaryColor(),
+                        color: theme.fn.themeColor('accent'),
                     })}
                 >
                     <BsLightbulb size={17} />
@@ -111,7 +111,12 @@ export const EditProductImages = (product: AdminProductEntity) => {
                 </Stack>
             </Reorder.Group>
 
-            <Button mt="lg" onClick={reorderImages} disabled={!isOrderChanged}>
+            <Button
+                mt="lg"
+                onClick={reorderImages}
+                disabled={!isOrderChanged}
+                color="dark"
+            >
                 Reorder images
             </Button>
         </SectionLayout>

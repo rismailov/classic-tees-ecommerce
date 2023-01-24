@@ -1,3 +1,5 @@
+import useCartStore from '@/lib/store/cart.store'
+import useUiStore from '@/lib/store/ui.store'
 import {
     ActionIcon,
     Container,
@@ -7,14 +9,12 @@ import {
     Indicator,
     UnstyledButton,
 } from '@mantine/core'
+import { FiShoppingCart } from '@react-icons/all-files/fi/FiShoppingCart'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { AuthDropdown } from './AuthDropdown'
 import { Logo } from './Logo'
 import { Menu } from './Menu'
-import { AiOutlineShoppingCart } from 'react-icons/ai'
-import { UserDropdown } from './UserDropdown'
-import Link from 'next/link'
-import useUiStore from '@/lib/store/ui.store'
-import useCartStore from '@/lib/store/cart.store'
-import { usePathname } from 'next/navigation'
 
 export const Header = () => {
     const pathname = usePathname() ?? ''
@@ -48,7 +48,7 @@ export const Header = () => {
                     </Group>
 
                     <Group position="right" spacing="xs">
-                        <UserDropdown />
+                        <AuthDropdown />
 
                         {!pathname.includes('admin') && (
                             <Indicator
@@ -64,7 +64,7 @@ export const Header = () => {
                                 }}
                             >
                                 <ActionIcon onClick={toggleCart}>
-                                    <AiOutlineShoppingCart />
+                                    <FiShoppingCart size={18} />
                                 </ActionIcon>
                             </Indicator>
                         )}

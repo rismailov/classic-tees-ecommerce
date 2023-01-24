@@ -1,27 +1,10 @@
 import axios from '@/lib/axios'
-import { UserEntity } from '@/types/entities/fuser.entity'
+import { LoginDto } from '@/types/api/dto/auth/login.dto'
+import { RegisterDto } from '@/types/api/dto/auth/register.dto'
+import { UserEntity } from '@/types/entities/user.entity'
 
-/**
- * Types
- */
-export type LoginDto = {
-    email: string
-    password: string
-    remember: boolean
-}
+export const csrf = async () => await axios.get('/sanctum/csrf-cookie')
 
-export type RegisterDto = {
-    firstName: string
-    lastName: string
-    email: string
-    password: string
-    passwordConfirmation: string
-    isTosAccepted: false // Terms of Service
-}
-
-/**
- * Endpoints
- */
 export const getUser = async (): Promise<UserEntity> => await axios.get('user')
 
 export const login = async (formValues: LoginDto): Promise<void> =>
@@ -30,4 +13,4 @@ export const login = async (formValues: LoginDto): Promise<void> =>
 export const register = async (formValues: RegisterDto): Promise<void> =>
     await axios.post('/register', formValues)
 
-export const logoutUser = async () => await axios.post('auth/logout')
+export const logoutUser = async () => await axios.post('/logout')

@@ -41,12 +41,7 @@ export default function Shop({ sizes, colours }: FilterOptions) {
 
     return (
         <Container>
-            <Group
-                pos="relative"
-                align="start"
-                spacing="xl"
-                sx={{ '& > div': { paddingTop: 30 } }}
-            >
+            <Group pos="relative" align="start" spacing="xl">
                 <Filters />
 
                 <Stack pos="relative" sx={{ flex: 1 }} pb={70}>

@@ -1,5 +1,5 @@
 import { Box } from '@mantine/core'
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 import { Cart } from '../app/Cart/Cart'
 import { Header } from '../app/Header'
 

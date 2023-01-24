@@ -1,35 +1,31 @@
 import AuthLayout from '@/components/layouts/AuthLayout'
-import {
-    Button,
-    Checkbox,
-    Group,
-    PasswordInput,
-    Stack,
-    TextInput,
-} from '@mantine/core'
+import { register } from '@/lib/api/auth'
+import { REACT_QUERY_AUTH_KEY } from '@/lib/constants'
+import { RegisterDto } from '@/types/api/dto/auth/register.dto'
+import { Button, PasswordInput, Stack, TextInput } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { useFocusTrap } from '@mantine/hooks'
 import Head from 'next/head'
 import { ReactElement } from 'react'
-import { RegisterDto } from '@/lib/api/auth'
+import { useMutation, useQueryClient } from 'react-query'
 
 export default function Register() {
+    const queryClient = useQueryClient()
     const ref = useFocusTrap()
     const form = useForm<RegisterDto>({
         initialValues: {
-            firstName: '',
-            lastName: '',
+            fname: '',
+            lname: '',
             email: '',
             password: '',
-            passwordConfirmation: '',
-            isTosAccepted: false,
+            password_confirmation: '',
         },
         validate: {
-            firstName: (value) =>
+            fname: (value) =>
                 value.length < 2
                     ? 'First name must have at least 2 letters'
                     : null,
-            lastName: (value) =>
+            lname: (value) =>
                 value.length < 2
                     ? 'Last name must have at least 2 letters'
                     : null,
@@ -38,8 +34,12 @@ export default function Register() {
         },
     })
 
-    const onSubmit = (values: RegisterDto) => {
-        console.log(values)
+    const { mutateAsync, isLoading } = useMutation(register, { meta: { form } })
+
+    const onSubmit = async (values: RegisterDto) => {
+        await mutateAsync(values)
+
+        queryClient.invalidateQueries(REACT_QUERY_AUTH_KEY)
     }
 
     return (
@@ -55,14 +55,14 @@ export default function Register() {
                     ref={ref}
                     placeholder="First name"
                     size="md"
-                    {...form.getInputProps('firstName')}
+                    {...form.getInputProps('fname')}
                 />
 
                 <TextInput
                     required
                     placeholder="Last name"
                     size="md"
-                    {...form.getInputProps('lastName')}
+                    {...form.getInputProps('lname')}
                 />
                 {/* </Group> */}
 
@@ -85,21 +85,16 @@ export default function Register() {
                     required
                     placeholder="Confirm password"
                     size="md"
-                    {...form.getInputProps('passwordConfirmation')}
-                />
-
-                <Checkbox
-                    label="I agree to sell my privacy"
-                    {...form.getInputProps('isTosAccepted')}
+                    {...form.getInputProps('password_confirmation')}
                 />
 
                 <Button
                     type="submit"
+                    color="dark"
+                    loading={isLoading}
+                    h={50}
                     size="md"
-                    disabled={
-                        !form.values.isTosAccepted ||
-                        Object.values(form.values).some((v) => v === '')
-                    }
+                    disabled={Object.values(form.values).some((v) => v === '')}
                     fullWidth
                 >
                     Register

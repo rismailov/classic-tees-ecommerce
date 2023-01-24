@@ -15,19 +15,10 @@ class RegisterUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'fname'    => ['required', 'string', 'min:2', 'max:30'],
-            'lname'    => ['required', 'string', 'min:2', 'max:30'],
+            'fname'    => ['required', 'string', 'min:2', 'max:30', 'alpha'],
+            'lname'    => ['required', 'string', 'min:2', 'max:30', 'alpha'],
             'email'    => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ];
-    }
-
-    public function prepareForValidation()
-    {
-        $this->merge([
-            'fname'                 => $this->firstName,
-            'lname'                 => $this->lastName,
-            'password_confirmation' => $this->passwordConfirmation,
-        ]);
     }
 }

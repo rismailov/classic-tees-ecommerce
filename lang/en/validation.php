@@ -169,7 +169,10 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'fname' => 'first name',
+        'lname' => 'last name',
+    ],
 
     /* ======================================================================================== */
     'alpha_spaces' => 'The :attribute may only contain letters and spaces.',

@@ -61,6 +61,7 @@ export const EditProductData = (product: AdminProductEntity) => {
 
                         <Button
                             type="submit"
+                            color="dark"
                             fullWidth
                             sx={{ height: 45 }}
                             loading={isSubmitting}

@@ -55,6 +55,7 @@ export const UploadNewImages = (product: AdminProductEntity) => {
                 <Button
                     mt="lg"
                     type="submit"
+                    color="dark"
                     disabled={!form.values.images.length}
                     loading={isFormSubmitting}
                 >
