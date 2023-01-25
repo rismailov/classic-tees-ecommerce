@@ -36,4 +36,3 @@ Route::post('/products/{product}/reviews', [ReviewController::class, 'store']);
 Route::get('/options/product-filters', [OptionController::class, 'productFilters']);
 
 require __DIR__.'/api/admin.php';
-require __DIR__.'/auth.php';

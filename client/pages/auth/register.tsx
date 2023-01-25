@@ -1,7 +1,6 @@
 import AuthLayout from '@/components/layouts/AuthLayout'
-import { useAuth } from '@/hooks/use-auth'
 import { register } from '@/lib/api/auth'
-import { REACT_QUERY_AUTH_KEY } from '@/lib/constants'
+import { REACT_QUERY_AUTH_KEY, RR_MIDDLEWARE_GUEST_SHOP } from '@/lib/constants'
 import { RegisterDto } from '@/types/api/dto/auth/register.dto'
 import { sleep } from '@/utils'
 import {
@@ -15,11 +14,13 @@ import { useForm } from '@mantine/form'
 import { useFocusTrap } from '@mantine/hooks'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import { ReactElement, useState } from 'react'
 
 export default function Register() {
     const queryClient = useQueryClient()
-    const { user, isLoading } = useAuth({ middleware: 'guest' })
+
+    const router = useRouter()
 
     const ref = useFocusTrap()
 
@@ -60,16 +61,17 @@ export default function Register() {
             queryClient.invalidateQueries({
                 queryKey: [REACT_QUERY_AUTH_KEY],
             })
-        } catch (_) {}
 
-        setIsFormSubmitting(false)
+            // TODO: redirect based on user role
+            router.push(RR_MIDDLEWARE_GUEST_SHOP)
+        } catch (_) {
+            setIsFormSubmitting(false)
+        }
     }
 
     return (
         <form onSubmit={form.onSubmit(onSubmit)}>
-            {(user || isLoading || isFormSubmitting) && (
-                <LoadingOverlay visible={true} />
-            )}
+            {isFormSubmitting && <LoadingOverlay visible={true} />}
 
             <Head>
                 <title>Register</title>
