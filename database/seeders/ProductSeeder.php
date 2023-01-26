@@ -87,6 +87,34 @@ class ProductSeeder extends Seeder
                 'imagesDir' => 'seeder/products/polo/military-beige',
             ],
 
+            [
+                'name'        => 'White Polo',
+                'description' => 'White Polo',
+                'price'       => 30.00,
+                'category'    => ProductCategoryEnum::POLO->value,
+                'colour'      => 'white',
+                'sizeIds'     => [
+                    $sizes['s'],
+                    $sizes['l'],
+                    $sizes['xl'],
+                ],
+                'imagesDir' => 'seeder/products/polo/white',
+            ],
+
+            [
+                'name'        => 'Burgundy Polo',
+                'description' => 'Burgundy Polo',
+                'price'       => 30.00,
+                'category'    => ProductCategoryEnum::POLO->value,
+                'colour'      => 'burgundy',
+                'sizeIds'     => [
+                    $sizes['s'],
+                    $sizes['l'],
+                    $sizes['xl'],
+                ],
+                'imagesDir' => 'seeder/products/polo/burgundy',
+            ],
+
             // V-Neck
             [
                 'name'        => 'Black V-Neck T-Shirt',
@@ -101,6 +129,34 @@ class ProductSeeder extends Seeder
                 ],
                 'imagesDir' => 'seeder/products/v-neck/black',
             ],
+
+            [
+                'name'        => 'White V-Neck T-Shirt',
+                'description' => 'White V-Neck T-Shirt',
+                'price'       => 21.00,
+                'category'    => ProductCategoryEnum::V_NECK->value,
+                'colour'      => 'white',
+                'sizeIds'     => [
+                    $sizes['s'],
+                    $sizes['l'],
+                    $sizes['xl'],
+                ],
+                'imagesDir' => 'seeder/products/v-neck/white',
+            ],
+
+            [
+                'name'        => 'Light Gray V-Neck T-Shirt',
+                'description' => 'Light Gray V-Neck T-Shirt',
+                'price'       => 27.00,
+                'category'    => ProductCategoryEnum::V_NECK->value,
+                'colour'      => 'light-gray',
+                'sizeIds'     => [
+                    $sizes['s'],
+                    $sizes['l'],
+                    $sizes['xl'],
+                ],
+                'imagesDir' => 'seeder/products/v-neck/light-gray',
+            ],
         ];
 
         foreach ($products as $idx => $product) {
@@ -112,6 +168,7 @@ class ProductSeeder extends Seeder
             }
 
             // skip if specified colour doesn't exist
+            ray($product['colour'], $colours);
             if (! $colours[$product['colour']]) {
                 echo 'Colour ('.$product['colour'].') does not exists or was not seeded';
 
@@ -133,7 +190,8 @@ class ProductSeeder extends Seeder
                     $created->colours()->sync($colours[$product['colour']]);
 
                     foreach (
-                        File::allFiles(storage_path('app/'.$product['imagesDir'])) as $idx => $file
+                        File::allFiles(storage_path('app/'.$product['imagesDir']))
+                        as $idx => $file
                     ) {
                         $fileName = $file->getFilename();
                         $path = 'images/products/'.$created->id.'/';
@@ -151,7 +209,7 @@ class ProductSeeder extends Seeder
                         // save image model
                         $created->images()->create([
                             'url'   => Storage::url($path.$fileName),
-                            'order' => $idx,
+                            'order' => $fileName[0],
                         ]);
                     }
                 });

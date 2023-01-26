@@ -28,6 +28,10 @@ class DatabaseSeeder extends Seeder
             $callables[] = ProductSeeder::class;
         }
 
+        if (! DB::table('reviews')->count()) {
+            $callables[] = ReviewSeeder::class;
+        }
+
         $this->call($callables);
     }
 }
