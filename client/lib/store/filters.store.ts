@@ -1,6 +1,6 @@
 import { PriceProductFilter } from '@/types/product-filters/price.product-filter'
 import { Sort } from '@/types/product-filters/sort.product-filter'
-import create from 'zustand'
+import { create } from 'zustand'
 import { LOAD_MORE_PRODUCTS_AMOUNT } from '../constants'
 
 type FiltersStore = {

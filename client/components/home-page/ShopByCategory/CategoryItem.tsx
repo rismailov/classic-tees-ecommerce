@@ -4,19 +4,31 @@ import { ReactNode } from 'react'
 
 export const CategoryItem = ({
     categoryIcon,
+    categoryValue,
     title,
 }: {
     categoryIcon: ReactNode
+    categoryValue: string
     title: string
 }) => {
     return (
-        <UnstyledButton component={Link} href="/shop">
+        <UnstyledButton
+            component={Link}
+            href={{
+                pathname: '/shop',
+                query: {
+                    category: categoryValue,
+                },
+            }}
+            // @note: hides query param from URL
+            as="/shop"
+        >
             <Stack
                 align="center"
                 spacing={5}
                 sx={(theme) => ({
                     color: theme.colors.dark[6],
-                    transition: 'color 0.2s ease 0s',
+                    transition: 'color 0.1s ease 0s',
                     svg: {
                         width: 75,
                         height: 75,

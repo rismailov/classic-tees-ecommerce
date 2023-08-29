@@ -4,8 +4,8 @@
  */
 import { NotificationProps, useMantineTheme } from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
+import { IconAlertTriangle, IconCheck, IconX } from '@tabler/icons-react'
 // import useTranslation from 'next-translate/useTranslation'
-import { FiAlertTriangle, FiCheck, FiX } from 'react-icons/fi'
 
 type Props = {
     message: string
@@ -55,7 +55,7 @@ export const useToast = () => {
             arg,
             color: 'green',
             title: 'Success',
-            icon: <FiCheck strokeWidth={3} />,
+            icon: <IconCheck strokeWidth={3} />,
         })
     }
 
@@ -64,7 +64,7 @@ export const useToast = () => {
             arg,
             color: 'red',
             title: 'Error',
-            icon: <FiX strokeWidth={3} />,
+            icon: <IconX strokeWidth={3} />,
         })
     }
 
@@ -73,7 +73,7 @@ export const useToast = () => {
             arg,
             color: 'orange',
             title: 'Warning',
-            icon: <FiAlertTriangle strokeWidth={3} />,
+            icon: <IconAlertTriangle strokeWidth={3} />,
         })
     }
 
@@ -82,7 +82,7 @@ export const useToast = () => {
             arg,
             color: 'blue',
             title: 'Info',
-            icon: <FiAlertTriangle strokeWidth={3} />,
+            icon: <IconAlertTriangle strokeWidth={3} />,
         })
     }
 

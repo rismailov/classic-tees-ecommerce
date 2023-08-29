@@ -5,11 +5,11 @@ import {
     Container,
     Divider,
     Group,
-    Header as MantineHeader,
     Indicator,
+    Header as MantineHeader,
     UnstyledButton,
 } from '@mantine/core'
-import { FiShoppingCart } from '@react-icons/all-files/fi/FiShoppingCart'
+import { IconShoppingCart } from '@tabler/icons-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { AuthDropdown } from './AuthDropdown'
@@ -72,7 +72,7 @@ export const Header = () => {
                                 }}
                             >
                                 <ActionIcon onClick={toggleCart}>
-                                    <FiShoppingCart size={18} />
+                                    <IconShoppingCart size={18} />
                                 </ActionIcon>
                             </Indicator>
                         )}

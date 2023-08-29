@@ -40,7 +40,7 @@ export default function Shop({ sizes, colours }: FilterOptions) {
     }, [category])
 
     return (
-        <Container>
+        <Container pt="xl">
             <Group pos="relative" align="start" spacing="xl">
                 <Filters />
 

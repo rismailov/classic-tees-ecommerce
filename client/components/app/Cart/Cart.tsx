@@ -1,21 +1,20 @@
 import useCartStore from '@/lib/store/cart.store'
 import useUiStore from '@/lib/store/ui.store'
 import {
-    Text,
-    Stack,
-    Center,
-    Title,
-    Drawer,
-    Group,
     ActionIcon,
     Box,
-    Divider,
     Button,
+    Center,
+    Divider,
+    Drawer,
+    Group,
+    Stack,
+    Text,
+    Title,
 } from '@mantine/core'
+import { IconBox, IconX } from '@tabler/icons-react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { CartItem } from './CartItem'
-import { FiX } from '@react-icons/all-files/fi/FiX'
-import { FiBox } from 'react-icons/fi'
 
 export const Cart = () => {
     const isCartOpened = useUiStore((state) => state.isCartOpened)
@@ -32,6 +31,7 @@ export const Cart = () => {
             withCloseButton={false}
             transitionDuration={350}
             size="xl"
+            zIndex={1002}
             styles={(theme) => ({
                 overlay: {
                     background:
@@ -60,7 +60,7 @@ export const Cart = () => {
                         onClick={toggleCart}
                         sx={{ borderRadius: '999px' }}
                     >
-                        <FiX size={20} />
+                        <IconX size={20} />
                     </ActionIcon>
 
                     <Divider
@@ -139,7 +139,7 @@ export const Cart = () => {
                         <Group spacing="xs" opacity={0.75}>
                             <Text size="sm">Free shipping</Text>
 
-                            <FiBox size={15} />
+                            <IconBox size={15} />
                         </Group>
                     </Group>
 

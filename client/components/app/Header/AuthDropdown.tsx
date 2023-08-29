@@ -11,10 +11,13 @@ import {
     Text,
     Tooltip,
 } from '@mantine/core'
-import { FiEdit } from '@react-icons/all-files/fi/FiEdit'
-import { FiLogOut } from '@react-icons/all-files/fi/FiLogOut'
-import { FiShoppingCart } from '@react-icons/all-files/fi/FiShoppingCart'
-import { FiUser } from '@react-icons/all-files/fi/FiUser'
+import {
+    IconCar,
+    IconEdit,
+    IconLogout,
+    IconShoppingCart,
+    IconUser,
+} from '@tabler/icons-react'
 import Link from 'next/link'
 import { useState } from 'react'
 
@@ -47,7 +50,7 @@ export const AuthDropdown = () => {
                         },
                     })}
                 >
-                    <FiUser size={20} />
+                    <IconUser size={20} />
                 </ActionIcon>
             </Menu.Target>
 
@@ -131,12 +134,14 @@ export const AuthDropdown = () => {
                 <Divider />
 
                 {/*Nav*/}
-                <Menu.Item icon={<FiEdit size={17} />}>Account</Menu.Item>
-                <Menu.Item icon={<FiShoppingCart size={17} />}>Cart</Menu.Item>
+                <Menu.Item icon={<IconEdit size={17} />}>Account</Menu.Item>
+                <Menu.Item icon={<IconShoppingCart size={17} />}>
+                    Cart
+                </Menu.Item>
                 {user && (
                     <Menu.Item
                         onClick={logout}
-                        icon={<FiLogOut size={17} />}
+                        icon={<IconLogout size={17} />}
                         color="red"
                     >
                         Logout

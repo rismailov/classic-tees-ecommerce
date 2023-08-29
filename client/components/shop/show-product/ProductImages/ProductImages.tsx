@@ -1,19 +1,19 @@
+import { UserProductShowEntity } from '@/types/entities/product.entity'
 import {
+    ActionIcon,
+    Box,
+    Group,
     Image,
     Stack,
-    Box,
-    ActionIcon,
-    Group,
     UnstyledButton,
 } from '@mantine/core'
+import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react'
 import { useEffect, useRef, useState } from 'react'
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
-import { useStyles } from './ProductImages.styles'
-import { Navigation, Thumbs } from 'swiper'
+import 'swiper/css'
+import { Navigation, Thumbs } from 'swiper/modules'
 import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react'
 import { Swiper as SwiperCore } from 'swiper/types'
-import 'swiper/css'
-import { UserProductShowEntity } from '@/types/entities/product.entity'
+import { useStyles } from './ProductImages.styles'
 
 export const ProductImages = ({
     product,
@@ -92,7 +92,7 @@ export const ProductImages = ({
                     onClick={() => mainSwiperRef.current?.slidePrev()}
                     disabled={mainActiveIndex === 0}
                 >
-                    <FiChevronLeft />
+                    <IconChevronLeft />
                 </ActionIcon>
 
                 <Swiper {...mainSwiperParams}>
@@ -116,7 +116,7 @@ export const ProductImages = ({
                     onClick={() => mainSwiperRef.current?.slideNext()}
                     disabled={mainActiveIndex === product.images.length - 1}
                 >
-                    <FiChevronRight />
+                    <IconChevronRight />
                 </ActionIcon>
             </Box>
 
@@ -134,7 +134,7 @@ export const ProductImages = ({
                     className={classes.secondSliderNavButton}
                     disabled={isBeginning}
                 >
-                    <FiChevronLeft />
+                    <IconChevronLeft />
                 </ActionIcon>
 
                 <Swiper {...thumbsSwiperParams}>
@@ -174,7 +174,7 @@ export const ProductImages = ({
                     className={classes.secondSliderNavButton}
                     disabled={isEnd}
                 >
-                    <FiChevronRight />
+                    <IconChevronRight />
                 </ActionIcon>
             </Group>
         </Stack>

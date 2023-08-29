@@ -21,7 +21,7 @@ import {
     TextInputProps,
     TextInputStylesNames,
 } from '@mantine/core'
-import { FiEye, FiEyeOff } from 'react-icons/fi'
+import { IconEye, IconEyeOff } from '@tabler/icons-react'
 import { ThemeComponent } from '.'
 import { defaultProps } from './partials/default-props'
 import { inputStyles, selectStyles } from './partials/styles'
@@ -157,9 +157,9 @@ export const PasswordInput: ThemeComponent<
         ...defaultProps.input,
         visibilityToggleIcon: ({ reveal }) =>
             reveal ? (
-                <FiEye size={13} style={{ opacity: 0.7 }} />
+                <IconEye size={13} style={{ opacity: 0.7 }} />
             ) : (
-                <FiEyeOff size={13} style={{ opacity: 0.7 }} />
+                <IconEyeOff size={13} style={{ opacity: 0.7 }} />
             ),
     },
 

@@ -1,5 +1,5 @@
 import { CartItem } from '@/types/cart-item.type'
-import create from 'zustand'
+import { create } from 'zustand'
 
 type CartStore = {
     items: CartItem[]

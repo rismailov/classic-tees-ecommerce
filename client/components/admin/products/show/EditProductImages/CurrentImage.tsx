@@ -1,6 +1,6 @@
 import { AdminProductEntity } from '@/types/entities/product.entity'
 import { Box, Group, Image } from '@mantine/core'
-import { FiTrash2 } from 'react-icons/fi'
+import { IconTrash } from '@tabler/icons-react'
 import { ImageActionButton } from '../../images/ImageActionButton'
 
 export const CurrentImage = ({
@@ -50,7 +50,7 @@ export const CurrentImage = ({
                         color="red"
                         onClick={deleteImage}
                     >
-                        <FiTrash2 size={15} />
+                        <IconTrash size={15} />
                     </ImageActionButton>
                 )}
             </Group>

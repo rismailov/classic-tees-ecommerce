@@ -1,20 +1,19 @@
 import { storeColour } from '@/lib/api/admin/colours'
+import { REACT_QUERY_COLOURS_KEY } from '@/lib/constants'
+import { StoreColourDto } from '@/types/api/dto/colours/store-colour.dto'
 import {
     ActionIcon,
     Button,
+    ColorInput,
     Group,
     Stack,
-    TextInput,
     Text,
-    ColorInput,
+    TextInput,
 } from '@mantine/core'
 import { useForm } from '@mantine/form'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { randomId } from '@mantine/hooks'
-import { FiTrash } from '@react-icons/all-files/fi/FiTrash'
-import { FiPlus } from '@react-icons/all-files/fi/FiPlus'
-import { StoreColourDto } from '@/types/api/dto/colours/store-colour.dto'
-import { REACT_QUERY_COLOURS_KEY } from '@/lib/constants'
+import { IconPlus, IconTrash } from '@tabler/icons-react'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 export const CreateColourForm = () => {
     const queryClient = useQueryClient()
@@ -60,7 +59,7 @@ export const CreateColourForm = () => {
                     color="red"
                     onClick={() => form.removeListItem('colours', index)}
                 >
-                    <FiTrash size={15} />
+                    <IconTrash size={15} />
                 </ActionIcon>
             </Group>
         </Group>
@@ -105,7 +104,7 @@ export const CreateColourForm = () => {
                                 key: randomId(),
                             })
                         }
-                        rightIcon={<FiPlus size={15} />}
+                        rightIcon={<IconPlus size={15} />}
                     >
                         Add colour
                     </Button>

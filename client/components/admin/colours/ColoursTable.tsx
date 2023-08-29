@@ -1,8 +1,8 @@
 import { TJsonResponse } from '@/types/api/json-response.type'
 import { ColourEntity } from '@/types/entities/colour.entity'
 import { Group, Table, UnstyledButton } from '@mantine/core'
-import { FiTrash } from '@react-icons/all-files/fi/FiTrash'
 import { UseMutateAsyncFunction } from '@tanstack/react-query'
+import { IconTrash } from '@tabler/icons-react'
 
 export const ColoursTable = ({
     colours,
@@ -45,7 +45,7 @@ export const ColoursTable = ({
                             >
                                 <Group spacing={5}>
                                     Remove
-                                    <FiTrash size={16} />
+                                    <IconTrash size={16} />
                                 </Group>
                             </UnstyledButton>
                         </td>

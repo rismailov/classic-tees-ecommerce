@@ -1,4 +1,4 @@
-import { Box, Container, Group, Stack, Title, Text } from '@mantine/core'
+import { Box, Container, Group, Stack, Text, Title } from '@mantine/core'
 import { motion } from 'framer-motion'
 
 export const Footer = () => {

@@ -1,8 +1,7 @@
 import useFiltersStore from '@/lib/store/filters.store'
 import { Menu, UnstyledButton } from '@mantine/core'
-import { FiChevronDown } from '@react-icons/all-files/fi/FiChevronDown'
 import { Sort } from '@/types/product-filters/sort.product-filter'
-import { AiOutlineCheck } from '@react-icons/all-files/ai/AiOutlineCheck'
+import { IconCheck, IconChevronDown } from '@tabler/icons-react'
 
 const sortOptions: { value: Sort; label: string }[] = [
     { value: 'date-desc', label: 'Date: New to old' },
@@ -46,7 +45,7 @@ export const SortProducts = () => {
                     })}
                 >
                     Sort
-                    <FiChevronDown />
+                    <IconChevronDown />
                 </UnstyledButton>
             </Menu.Target>
 
@@ -67,7 +66,7 @@ export const SortProducts = () => {
                         })}
                         rightSection={
                             sort === opt.value ? (
-                                <AiOutlineCheck size={15} />
+                                <IconCheck size={15} />
                             ) : undefined
                         }
                     >

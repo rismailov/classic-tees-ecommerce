@@ -1,7 +1,7 @@
 import { Box, Group, Image } from '@mantine/core'
 import { FileWithPath } from '@mantine/dropzone'
-import { FiStar, FiTrash } from 'react-icons/fi'
 import { ImageActionButton } from '../../images/ImageActionButton'
+import { IconStar, IconTrash } from '@tabler/icons-react'
 
 export const ImagePreview = ({
     file,
@@ -49,7 +49,7 @@ export const ImagePreview = ({
                     tooltiplabel="Remove image"
                     onClick={() => removeImage(index)}
                 >
-                    <FiTrash size={15} />
+                    <IconTrash size={15} />
                 </ImageActionButton>
 
                 {typeof isMain !== 'undefined' &&
@@ -61,7 +61,7 @@ export const ImagePreview = ({
                             variant="light"
                             onClick={() => makeMain(index)}
                         >
-                            <FiStar size={15} />
+                            <IconStar size={15} />
                         </ImageActionButton>
                     )}
             </Group>

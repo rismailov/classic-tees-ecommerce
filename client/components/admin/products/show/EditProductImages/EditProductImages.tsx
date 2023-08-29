@@ -8,10 +8,10 @@ import { AdminProductEntity } from '@/types/entities/product.entity'
 import { Stack, Text, Alert, Group, Button } from '@mantine/core'
 import { Reorder, useMotionValue } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
-import { BsLightbulb } from 'react-icons/bs'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { SectionLayout } from '../../../SectionLayout'
 import { CurrentImage } from './CurrentImage'
+import { IconLighter } from '@tabler/icons-react'
 
 export const EditProductImages = (product: AdminProductEntity) => {
     const queryClient = useQueryClient()
@@ -70,7 +70,7 @@ export const EditProductImages = (product: AdminProductEntity) => {
                         color: theme.fn.primaryColor(),
                     })}
                 >
-                    <BsLightbulb size={17} />
+                    <IconLighter size={17} />
 
                     <Text weight={500}>
                         The first image will be the main one.

@@ -1,7 +1,6 @@
 import useFiltersStore from '@/lib/store/filters.store'
 import { Checkbox, Group, NumberInput, Stack } from '@mantine/core'
-import { BsCurrencyDollar } from 'react-icons/bs'
-import { FiMinus } from 'react-icons/fi'
+import { IconCurrencyDollar, IconMinus } from '@tabler/icons-react'
 import { FilterLayout } from '../layouts/FilterLayout'
 
 export const PriceFilter = () => {
@@ -37,7 +36,7 @@ export const PriceFilter = () => {
                         min={0.0}
                         precision={2}
                         placeholder="min"
-                        icon={<BsCurrencyDollar size={14} />}
+                        icon={<IconCurrencyDollar size={14} />}
                         styles={{
                             input: {
                                 paddingLeft: '30px !important',
@@ -45,7 +44,7 @@ export const PriceFilter = () => {
                         }}
                     />
 
-                    <FiMinus style={{ opacity: 0.5 }} />
+                    <IconMinus style={{ opacity: 0.5 }} />
 
                     {/* TODO: change icon based on user's location */}
                     <NumberInput
@@ -58,7 +57,7 @@ export const PriceFilter = () => {
                         }
                         precision={2}
                         placeholder="max"
-                        icon={<BsCurrencyDollar size={14} />}
+                        icon={<IconCurrencyDollar size={14} />}
                         styles={{
                             input: {
                                 paddingLeft: '30px !important',

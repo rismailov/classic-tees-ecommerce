@@ -11,8 +11,7 @@ import {
     TextInput,
 } from '@mantine/core'
 import { UseFormReturnType } from '@mantine/form'
-import { FiDollarSign } from '@react-icons/all-files/fi/FiDollarSign'
-import { FiPercent } from '@react-icons/all-files/fi/FiPercent'
+import { IconCurrencyDollar, IconPercentage } from '@tabler/icons-react'
 import { useQuery } from '@tanstack/react-query'
 import { forwardRef, useEffect, useRef } from 'react'
 
@@ -79,7 +78,7 @@ export const ProductFormCommon = ({
                 required
                 label="Price"
                 placeholder="Product price"
-                icon={<FiDollarSign size={15} />}
+                icon={<IconCurrencyDollar size={15} />}
                 {...form.getInputProps('price')}
             />
 
@@ -134,7 +133,7 @@ export const ProductFormCommon = ({
                         max={50}
                         precision={0}
                         placeholder={5}
-                        icon={<FiPercent />}
+                        icon={<IconPercentage />}
                         {...form.getInputProps('discountPercent')}
                     />
                 )}

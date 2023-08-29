@@ -1,6 +1,6 @@
 import { UserProductIndexEntity } from '@/types/entities/product.entity'
 import { ActionIcon, ActionIconProps } from '@mantine/core'
-import { FiCheck } from '@react-icons/all-files/fi/FiCheck'
+import { IconCheck } from '@tabler/icons-react'
 
 export const SelectSizeActionIcon = ({
     isLoading,
@@ -43,7 +43,7 @@ export const SelectSizeActionIcon = ({
                     }),
             })}
         >
-            {isSelected ? <FiCheck size={18} /> : size.label.toUpperCase()}
+            {isSelected ? <IconCheck size={18} /> : size.label.toUpperCase()}
         </ActionIcon>
     )
 }

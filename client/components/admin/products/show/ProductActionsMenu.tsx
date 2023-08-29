@@ -1,7 +1,7 @@
 import { ActionIcon, Menu } from '@mantine/core'
+import { IconDotsDiagonal, IconEye, IconTrash } from '@tabler/icons-react'
 import Link from 'next/link'
-import React, { useState } from 'react'
-import { FiEye, FiMoreHorizontal, FiTrash } from 'react-icons/fi'
+import { useState } from 'react'
 
 export const ProductActionsMenu = ({ nanoid }: { nanoid: string }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -15,13 +15,13 @@ export const ProductActionsMenu = ({ nanoid }: { nanoid: string }) => {
         >
             <Menu.Target>
                 <ActionIcon>
-                    <FiMoreHorizontal />
+                    <IconDotsDiagonal />
                 </ActionIcon>
             </Menu.Target>
 
             <Menu.Dropdown>
                 <Menu.Item
-                    icon={<FiEye size={15} />}
+                    icon={<IconEye size={15} />}
                     component={Link}
                     href={`/shop/${nanoid}`}
                     target="_blank"
@@ -29,7 +29,7 @@ export const ProductActionsMenu = ({ nanoid }: { nanoid: string }) => {
                     View in store
                 </Menu.Item>
 
-                <Menu.Item icon={<FiTrash size={15} />} color="red">
+                <Menu.Item icon={<IconTrash size={15} />} color="red">
                     Delete product
                 </Menu.Item>
             </Menu.Dropdown>

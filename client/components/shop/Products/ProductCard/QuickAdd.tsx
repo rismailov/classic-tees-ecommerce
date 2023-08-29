@@ -4,11 +4,10 @@ import { sleep } from '@/utils'
 import { Box, Text, Group, Stack, ActionIcon } from '@mantine/core'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import { FiPlus } from '@react-icons/all-files/fi/FiPlus'
-import { FiX } from '@react-icons/all-files/fi/FiX'
 import { SelectSizeActionIcon } from './quick-add/SelectSizeActionIcon'
 import { useStyles } from './QuickAdd.styles'
 import { UserProductIndexEntity } from '@/types/entities/product.entity'
+import { IconPlus, IconX } from '@tabler/icons-react'
 
 type TSize = UserProductIndexEntity['sizes'][number]
 
@@ -101,7 +100,7 @@ export const QuickAdd = ({
                                     size="md"
                                     onClick={toggleSizeSelectorOpened}
                                 >
-                                    <FiX size="15" />
+                                    <IconX size="15" />
                                 </ActionIcon>
                             </Group>
 
@@ -132,7 +131,7 @@ export const QuickAdd = ({
                                 Quick add
                             </Text>
 
-                            <FiPlus data-plus-icon size={16} />
+                            <IconPlus data-plus-icon size={16} />
                         </Group>
                     )}
                 </Box>

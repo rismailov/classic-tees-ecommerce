@@ -1,10 +1,10 @@
 import { Divider, Accordion, Stack, Title } from '@mantine/core'
-import { FiChevronDown } from 'react-icons/fi'
 import { useStyles } from './Filters.styles'
 import { CategoryFilter } from './filters/CategoryFilter'
 import { ColourFilter } from './filters/ColourFilter'
 import { PriceFilter } from './filters/PriceFilter'
 import { SizeFilter } from './filters/SizeFilter'
+import { IconChevronDown } from '@tabler/icons-react'
 
 export const Filters = () => {
     const { classes } = useStyles()
@@ -27,7 +27,7 @@ export const Filters = () => {
                 defaultValue={['price', 'category']}
                 multiple
                 variant="separated"
-                chevron={<FiChevronDown size={18} strokeWidth={1.85} />}
+                chevron={<IconChevronDown size={18} strokeWidth={1.85} />}
                 classNames={{
                     item: classes.item,
                     content: classes.content,

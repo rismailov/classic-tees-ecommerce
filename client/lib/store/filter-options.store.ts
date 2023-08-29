@@ -1,5 +1,5 @@
 import { Option } from '@/types/option.type'
-import create from 'zustand'
+import { create } from 'zustand'
 
 export type FilterOptions = {
     sizes: Option[]

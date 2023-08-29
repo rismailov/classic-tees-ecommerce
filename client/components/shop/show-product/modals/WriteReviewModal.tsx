@@ -13,8 +13,8 @@ import {
 } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { useState } from 'react'
-import { FiStar } from 'react-icons/fi'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { IconStar } from '@tabler/icons-react'
 
 const ReviewStar = ({
     setStars,
@@ -35,7 +35,7 @@ const ReviewStar = ({
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
         >
-            <FiStar />
+            <IconStar />
         </UnstyledButton>
     )
 }

@@ -1,8 +1,8 @@
 import { ReviewEntity } from '@/types/entities/review.entity'
 import { Card, Center, Group, Stack, Text, UnstyledButton } from '@mantine/core'
-import { FiUser } from '@react-icons/all-files/fi/FiUser'
 import { useState } from 'react'
 import { useStyles } from './Review.styles'
+import { IconUser } from '@tabler/icons-react'
 
 export const Review = (review: ReviewEntity) => {
     const [showFullText, setShowFullText] = useState(false)
@@ -14,7 +14,7 @@ export const Review = (review: ReviewEntity) => {
                 {/* client */}
                 <Group className="review-card__client-data" noWrap>
                     <Center className={classes.userAvatar}>
-                        <FiUser />
+                        <IconUser />
                     </Center>
 
                     <Stack spacing={0}>

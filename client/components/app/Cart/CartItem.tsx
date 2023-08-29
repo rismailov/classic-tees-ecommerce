@@ -12,8 +12,7 @@ import {
     Center,
     Button,
 } from '@mantine/core'
-import { FiMinus } from '@react-icons/all-files/fi/FiMinus'
-import { FiPlus } from '@react-icons/all-files/fi/FiPlus'
+import { IconMinus, IconPlus } from '@tabler/icons-react'
 
 const maxAmount = 5
 const minAmount = 1
@@ -106,7 +105,7 @@ export const CartItem = ({ cartItem }: { cartItem: TCartItem }) => {
                                         : {}
                                 }
                             >
-                                <FiMinus size={17} strokeWidth="1" />
+                                <IconMinus size={17} strokeWidth="1" />
                             </ActionIcon>
 
                             <Center w={15} sx={{ userSelect: 'none' }}>
@@ -125,7 +124,7 @@ export const CartItem = ({ cartItem }: { cartItem: TCartItem }) => {
                                         : {}
                                 }
                             >
-                                <FiPlus size={17} strokeWidth="1" />
+                                <IconPlus size={17} strokeWidth="1" />
                             </ActionIcon>
                         </Group>
 
