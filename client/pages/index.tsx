@@ -1,19 +1,19 @@
+import { Hero } from '@/components/home-page/Hero'
+import { ShopByCategory } from '@/components/home-page/ShopByCategory'
 import Head from 'next/head'
 
 export default function Home() {
     return (
         <>
             <Head>
-                <title>Create Next App</title>
+                <title>Home</title>
 
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <p>
-                Hello world
-                <br />
-                Foo
-            </p>
+            {/* Sections */}
+            <Hero />
+            <ShopByCategory />
         </>
     )
 }

@@ -11,3 +11,18 @@ html,
 header {
     margin-right: calc(100% - 100vw);
 }
+
+.animate-underline-on-hover {
+    display: inline-block;
+    padding-bottom: 0px;
+    background-image: linear-gradient(#ff922b 0 0);
+    background-position: 0 100%;
+    background-size: 0% 1.5px;
+    background-repeat: no-repeat;
+    transition: background-size 0.3s, background-position 0s 0.3s;
+}
+
+.animate-underline-on-hover:hover {
+    background-position: 100% 100%;
+    background-size: 100% 1.5px;
+}

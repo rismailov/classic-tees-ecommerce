@@ -44,7 +44,7 @@ export default function Shop({ sizes, colours }: FilterOptions) {
             <Group pos="relative" align="start" spacing="xl">
                 <Filters />
 
-                <Stack pos="relative" sx={{ flex: 1 }} pb={70}>
+                <Stack pos="relative" sx={{ flex: 1 }}>
                     <Group position="apart">
                         <Title order={2}>Men's Tops</Title>
 

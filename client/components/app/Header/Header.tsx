@@ -25,7 +25,15 @@ export const Header = () => {
     return (
         <MantineHeader fixed height={60}>
             <Container>
-                <Group sx={{ height: '100%' }} position="apart">
+                <Group
+                    position="apart"
+                    sx={{
+                        height: '100%',
+                        'a, button': {
+                            fontSize: 16,
+                        },
+                    }}
+                >
                     <Group spacing="xl">
                         <UnstyledButton
                             component={Link}
