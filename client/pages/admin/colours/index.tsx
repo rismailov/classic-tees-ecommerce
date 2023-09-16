@@ -50,7 +50,7 @@ export default function ColoursIndex() {
 
     return (
         <Group align="start">
-            <SectionLayout title="Colours" sx={{ flex: 1 }}>
+            <SectionLayout sx={{ flex: 1 }}>
                 <ColoursTable
                     colours={colours.data}
                     deleteColour={deleteColour}

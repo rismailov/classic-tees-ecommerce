@@ -1,5 +1,5 @@
 import AuthLayout from '@/components/layouts/AuthLayout'
-import { register } from '@/lib/api/auth'
+import { csrf, register } from '@/lib/api/auth'
 import { REACT_QUERY_AUTH_KEY, RR_MIDDLEWARE_GUEST_SHOP } from '@/lib/constants'
 import { RegisterDto } from '@/types/api/dto/auth/register.dto'
 import { sleep } from '@/utils'
@@ -19,9 +19,7 @@ import { ReactElement, useState } from 'react'
 
 export default function Register() {
     const queryClient = useQueryClient()
-
     const router = useRouter()
-
     const ref = useFocusTrap()
 
     const [isFormSubmitting, setIsFormSubmitting] = useState(false)
@@ -81,6 +79,7 @@ export default function Register() {
                 <TextInput
                     required
                     ref={ref}
+                    name="fname"
                     placeholder="First name"
                     size="md"
                     {...form.getInputProps('fname')}
@@ -88,6 +87,7 @@ export default function Register() {
 
                 <TextInput
                     required
+                    name="lname"
                     placeholder="Last name"
                     size="md"
                     {...form.getInputProps('lname')}

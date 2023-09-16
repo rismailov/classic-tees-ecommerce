@@ -45,7 +45,7 @@ export const SortProducts = () => {
                     })}
                 >
                     Sort
-                    <IconChevronDown />
+                    <IconChevronDown size={15} />
                 </UnstyledButton>
             </Menu.Target>
 

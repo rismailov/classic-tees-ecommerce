@@ -6,14 +6,16 @@ export const SectionLayout = ({
     children,
     ...rest
 }: {
-    title: string
+    title?: string
     children: ReactNode
 } & CardProps) => {
     return (
         <Card withBorder p="xl" {...rest}>
-            <Title mb="md" order={4} opacity={0.4}>
-                {title}
-            </Title>
+            {title && (
+                <Title mb="md" order={4} opacity={0.4}>
+                    {title}
+                </Title>
+            )}
 
             {children}
         </Card>

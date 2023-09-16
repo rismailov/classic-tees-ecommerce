@@ -17,7 +17,7 @@ export const ColoursTable = ({
     >
 }) => {
     return (
-        <Table verticalSpacing="xs" highlightOnHover>
+        <Table verticalSpacing="xs">
             <thead>
                 <tr>
                     <th>ID</th>

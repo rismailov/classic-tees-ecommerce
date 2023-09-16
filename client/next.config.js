@@ -6,8 +6,8 @@ module.exports = {
         formats: ['image/webp'],
         remotePatterns: [
             {
-                protocol: 'http',
-                hostname: 'localhost',
+                protocol: 'https',
+                hostname: 'api.tcommerce.test',
             },
         ],
     },

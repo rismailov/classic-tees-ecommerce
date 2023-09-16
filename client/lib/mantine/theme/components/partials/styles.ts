@@ -7,7 +7,7 @@ import {
 
 export const selectStyles: Styles<SelectStylesNames, any> = (theme) => ({
     input: {
-        fontWeight: 400,
+        // fontWeight: 400,
         transition: 'none',
         ':focus-within': {
             boxShadow: `0 0 0 0.05rem ${theme.fn.primaryColor()}`,
@@ -18,8 +18,8 @@ export const selectStyles: Styles<SelectStylesNames, any> = (theme) => ({
     },
 
     item: {
-        fontWeight: 400,
-        fontSize: theme.fontSizes.sm,
+        // fontWeight: 400,
+        // fontSize: theme.fontSizes.sm,
         paddingTop: 7,
         paddingBottom: 7,
     },

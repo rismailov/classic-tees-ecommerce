@@ -1,4 +1,4 @@
-import { Box, Container, Group, Stack, Text, Title } from '@mantine/core'
+import { Box, Container, Group, Stack, Title, Text } from '@mantine/core'
 import { motion } from 'framer-motion'
 
 export const Footer = () => {
@@ -7,7 +7,7 @@ export const Footer = () => {
             <Container>
                 <Group>
                     <Stack spacing="sm">
-                        <Title order={3} weight={800} color="white">
+                        <Title order={3} weight={700} color="white">
                             Confidence looks good on you.
                         </Title>
 

@@ -4,18 +4,17 @@ import { Checkbox } from '@mantine/core'
 import React from 'react'
 import { FilterLayout } from '../layouts/FilterLayout'
 
-export const CategoryFilter = () => {
+export const CategoryFilter = ({ value }: { value: string }) => {
     const categories = useFiltersStore((state) => state.categories)
     const setCategories = useFiltersStore((state) => state.setCategories)
 
     return (
-        <FilterLayout value="category" title="Category">
+        <FilterLayout value={value} title="Category">
             <Checkbox.Group
                 value={categories}
                 onChange={setCategories}
-                size="xs"
                 orientation="vertical"
-                spacing={3}
+                spacing="xs"
                 sx={{
                     '.mantine-Stack-root': {
                         paddingTop: 0,

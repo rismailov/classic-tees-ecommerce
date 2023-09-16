@@ -12,17 +12,18 @@ import {
     Tooltip,
 } from '@mantine/core'
 import {
-    IconCar,
     IconEdit,
     IconLogout,
     IconShoppingCart,
     IconUser,
 } from '@tabler/icons-react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 
 export const AuthDropdown = () => {
     const { user, logout } = useAuth()
+    const router = useRouter()
     const [opened, setOpened] = useState<boolean>(false)
 
     return (
@@ -140,7 +141,10 @@ export const AuthDropdown = () => {
                 </Menu.Item>
                 {user && (
                     <Menu.Item
-                        onClick={logout}
+                        onClick={async () => {
+                            await logout()
+                            router.push('/auth/login')
+                        }}
                         icon={<IconLogout size={17} />}
                         color="red"
                     >

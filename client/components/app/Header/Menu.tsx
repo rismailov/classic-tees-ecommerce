@@ -44,10 +44,10 @@ export const Menu = () => {
                             href={{
                                 pathname: '/shop',
                                 query: {
-                                    category: value,
+                                    categories: [value],
                                 },
                             }}
-                            // @note: hides query param from URL
+                            // hides query params from URL
                             as="/shop"
                             key={value}
                         >

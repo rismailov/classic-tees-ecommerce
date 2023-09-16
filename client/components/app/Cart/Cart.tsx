@@ -1,5 +1,4 @@
 import useCartStore from '@/lib/store/cart.store'
-import useUiStore from '@/lib/store/ui.store'
 import {
     ActionIcon,
     Box,
@@ -17,8 +16,8 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { CartItem } from './CartItem'
 
 export const Cart = () => {
-    const isCartOpened = useUiStore((state) => state.isCartOpened)
-    const toggleCart = useUiStore((state) => state.toggleCart)
+    const isCartOpened = useCartStore((state) => state.isCartOpened)
+    const toggleCart = useCartStore((state) => state.toggleIsCartOpened)
     const items = useCartStore((state) => state.items)
 
     return (

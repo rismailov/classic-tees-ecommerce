@@ -107,7 +107,7 @@ export const ProductFormCommon = ({
                 description="Available sizes"
                 withAsterisk
                 orientation="vertical"
-                spacing={0}
+                spacing="xs"
                 {...form.getInputProps('sizes')}
             >
                 {options.sizes.map(({ id, value }) => (
@@ -132,7 +132,7 @@ export const ProductFormCommon = ({
                         min={5}
                         max={50}
                         precision={0}
-                        placeholder={5}
+                        placeholder="5"
                         icon={<IconPercentage />}
                         {...form.getInputProps('discountPercent')}
                     />

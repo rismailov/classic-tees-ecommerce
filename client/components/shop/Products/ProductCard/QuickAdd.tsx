@@ -1,13 +1,12 @@
 import useCartStore from '@/lib/store/cart.store'
-import useUiStore from '@/lib/store/ui.store'
+import { UserProductIndexEntity } from '@/types/entities/product.entity'
 import { sleep } from '@/utils'
-import { Box, Text, Group, Stack, ActionIcon } from '@mantine/core'
+import { ActionIcon, Box, Group, Stack, Text } from '@mantine/core'
+import { IconPlus, IconX } from '@tabler/icons-react'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import { SelectSizeActionIcon } from './quick-add/SelectSizeActionIcon'
 import { useStyles } from './QuickAdd.styles'
-import { UserProductIndexEntity } from '@/types/entities/product.entity'
-import { IconPlus, IconX } from '@tabler/icons-react'
+import { SelectSizeActionIcon } from './quick-add/SelectSizeActionIcon'
 
 type TSize = UserProductIndexEntity['sizes'][number]
 
@@ -20,7 +19,7 @@ export const QuickAdd = ({
     isLoading: boolean
     setIsLoading: (v: boolean) => void
 }) => {
-    const toggleCart = useUiStore((state) => state.toggleCart)
+    const toggleCart = useCartStore((state) => state.toggleIsCartOpened)
     const addItem = useCartStore((state) => state.addItem)
 
     // @note this is only needed for animation

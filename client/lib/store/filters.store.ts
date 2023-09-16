@@ -24,7 +24,7 @@ type FiltersStore = {
 }
 
 const useFiltersStore = create<FiltersStore>((set) => ({
-    categories: ['polo'],
+    categories: [],
     setCategories: (categories) => set({ categories }),
 
     sizes: [],

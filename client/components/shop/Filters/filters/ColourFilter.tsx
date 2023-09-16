@@ -3,20 +3,19 @@ import useFiltersStore from '@/lib/store/filters.store'
 import { ColorSwatch, Group, Checkbox } from '@mantine/core'
 import { FilterLayout } from '../layouts/FilterLayout'
 
-export const ColourFilter = () => {
+export const ColourFilter = ({ value }: { value: string }) => {
     const colours = useFiltersStore((state) => state.colours)
     const setColours = useFiltersStore((state) => state.setColours)
 
     const options = useFilterOptionsStore((state) => state.options)
 
     return (
-        <FilterLayout value="colour" title="Colour">
+        <FilterLayout value={value} title="Colour">
             <Checkbox.Group
                 value={colours}
                 onChange={setColours}
-                size="xs"
                 orientation="vertical"
-                spacing={3}
+                spacing="xs"
                 sx={{
                     '.mantine-Stack-root': {
                         paddingTop: 0,

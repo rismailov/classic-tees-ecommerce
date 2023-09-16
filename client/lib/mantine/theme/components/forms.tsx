@@ -78,8 +78,7 @@ export const Checkbox: ThemeComponent<
     styles: (theme) => ({
         label: {
             paddingLeft: 8,
-            fontSize: 14,
-            fontWeight: 400,
+            fontSize: theme.fontSizes.md,
             userSelect: 'none',
         },
         input: {
@@ -146,7 +145,7 @@ export const NumberInput: ThemeComponent<
         decimalSeparator: '.',
         precision: 2,
     },
-    styles: inputStyles,
+    // styles: inputStyles,
 }
 
 export const PasswordInput: ThemeComponent<

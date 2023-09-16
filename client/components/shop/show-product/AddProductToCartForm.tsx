@@ -1,6 +1,5 @@
 import { SIZE_LABELS } from '@/lib/constants'
 import useCartStore from '@/lib/store/cart.store'
-import useUiStore from '@/lib/store/ui.store'
 import { UserProductShowEntity } from '@/types/entities/product.entity'
 import {
     ActionIcon,
@@ -30,8 +29,7 @@ export const AddProductToCartForm = ({
 
     const items = useCartStore((state) => state.items)
     const addItem = useCartStore((state) => state.addItem)
-
-    const toggleCart = useUiStore((state) => state.toggleCart)
+    const toggleCart = useCartStore((state) => state.toggleIsCartOpened)
 
     const form = useForm<AddProductToCartDto>({
         initialValues: {

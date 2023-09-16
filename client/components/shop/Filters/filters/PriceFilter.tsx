@@ -3,12 +3,12 @@ import { Checkbox, Group, NumberInput, Stack } from '@mantine/core'
 import { IconCurrencyDollar, IconMinus } from '@tabler/icons-react'
 import { FilterLayout } from '../layouts/FilterLayout'
 
-export const PriceFilter = () => {
+export const PriceFilter = ({ value }: { value: string }) => {
     const price = useFiltersStore((state) => state.price)
     const setPrice = useFiltersStore((state) => state.setPrice)
 
     return (
-        <FilterLayout value="price" title="Price">
+        <FilterLayout value={value} title="Price">
             <Stack spacing="xs">
                 <Checkbox
                     checked={price.onSale}
@@ -18,12 +18,11 @@ export const PriceFilter = () => {
                             onSale: event.currentTarget.checked,
                         })
                     }
-                    size="xs"
                     label="On sale"
                 />
 
                 {/* Price range */}
-                <Group noWrap spacing="xs">
+                <Group noWrap spacing="xs" mx={2}>
                     {/* TODO: change icon based on user's location */}
                     <NumberInput
                         value={price.min === null ? undefined : price.min}

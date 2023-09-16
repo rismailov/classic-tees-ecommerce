@@ -1,4 +1,4 @@
-import { Box, Divider, Stack, Text, Title } from '@mantine/core'
+import { Box, Center, Divider, Stack, Text, Title } from '@mantine/core'
 import { AnimatePresence, motion } from 'framer-motion'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -10,7 +10,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
     const { pathname } = useRouter()
 
     return (
-        <Stack align="center" spacing={5} pt={45}>
+        <Stack align="center" spacing={5} pt={45} pb={40}>
             <AnimatePresence mode="wait" initial={false}>
                 <motion.span
                     key={pathname}
@@ -37,7 +37,11 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
                 </motion.span>
             </AnimatePresence>
 
-            <Divider mt="md" sx={{ width: '100%', maxWidth: '50vw' }} />
+            <Divider
+                size={0.5}
+                mt="md"
+                sx={{ width: '100%', maxWidth: '50vw' }}
+            />
 
             <Stack p="md" pos="relative" sx={{ borderRadius: 5 }}>
                 <Stack align="center" spacing={5}>

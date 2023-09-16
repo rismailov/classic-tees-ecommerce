@@ -1,5 +1,5 @@
 import { ActionIcon, Menu } from '@mantine/core'
-import { IconDotsDiagonal, IconEye, IconTrash } from '@tabler/icons-react'
+import { IconDots, IconEye, IconTrash } from '@tabler/icons-react'
 import Link from 'next/link'
 import { useState } from 'react'
 
@@ -15,7 +15,7 @@ export const ProductActionsMenu = ({ nanoid }: { nanoid: string }) => {
         >
             <Menu.Target>
                 <ActionIcon>
-                    <IconDotsDiagonal />
+                    <IconDots size={18} />
                 </ActionIcon>
             </Menu.Target>
 

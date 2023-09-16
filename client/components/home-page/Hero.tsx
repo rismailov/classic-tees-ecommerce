@@ -5,24 +5,19 @@ import heroImage from './../../../public/hero/hero-image.webp'
 
 export const Hero = () => {
     return (
-        <Box bg="dark" pos="relative">
+        <Box
+            pos="relative"
+            sx={(theme) => ({ background: theme.colors.gray[0] })}
+        >
             <Container>
                 <Group noWrap align="stretch" mih="60vh">
                     {/* CTA */}
                     <Stack spacing={0} w="50%" py="xl" justify="center">
-                        <Title
-                            fz={50}
-                            sx={(theme) => ({ color: theme.colors.gray[0] })}
-                        >
+                        <Title fz={45} fw={800}>
                             Gifts he'll feel good in
                         </Title>
 
-                        <Title
-                            fz={25}
-                            weight={400}
-                            opacity={0.8}
-                            sx={(theme) => ({ color: theme.colors.gray[4] })}
-                        >
+                        <Title fz={25} weight={400} opacity={0.8}>
                             Confidence looks good on you.
                         </Title>
 
@@ -52,8 +47,6 @@ export const Hero = () => {
                             src={heroImage}
                             alt="Hero image"
                             fill
-                            placeholder="blur"
-                            priority
                             style={{
                                 objectFit: 'cover',
                                 objectPosition: 'center',
